@@ -1,0 +1,6 @@
+hoistPattern:
+  - '*@nextui-org/*'
+  - '*eslint*'
+  - '*prettier*'
+
+neverBuiltDependencies: []

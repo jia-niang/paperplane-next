@@ -1,0 +1,96 @@
+import { Group, Highlight } from '@mantine/core'
+import { IconCpu, IconFileDescription, IconHome, IconVersions } from '@tabler/icons-react'
+import { FC } from 'react'
+
+import { KVTable, KVTableRow } from '@/components/tables/KVTable'
+import { DockerHubLink, GiteaLink, GitHubLink, NpmLink } from '@/components/tags/TechLink'
+
+export interface OpenDetailTableProps {
+  type: 'docker' | 'npm'
+  name: string
+  repo: string
+  giteaRepo?: string
+  tech?: FC | FC[]
+}
+
+export function OpenDetailTable(props: OpenDetailTableProps) {
+  const { type, name, repo, giteaRepo = repo, tech } = props
+
+  return (
+    <KVTable>
+      <KVTableRow label="主页" icon={<IconHome />}>
+        {type === 'docker' ? (
+          <DockerHubLink repo={name}>
+            <Highlight
+              highlight={`/` + name}
+              component="span"
+              highlightStyles={{ padding: '0 4px', margin: '0 3px', borderRadius: '4px' }}
+              inherit
+            >{`hub.docker.com/r/${name}`}</Highlight>
+          </DockerHubLink>
+        ) : (
+          <NpmLink repo={name}>
+            <Highlight
+              highlight={`/` + name}
+              component="span"
+              highlightStyles={{ padding: '0 4px', margin: '0 3px', borderRadius: '4px' }}
+              inherit
+            >{`npmjs.com/package/${name}`}</Highlight>
+          </NpmLink>
+        )}
+      </KVTableRow>
+
+      <KVTableRow label="源码" icon={<IconFileDescription />}>
+        <Group gap={16}>
+          <GitHubLink repo={repo} />
+          <GiteaLink repo={giteaRepo} />
+        </Group>
+      </KVTableRow>
+
+      <KVTableRow label="版本" icon={<IconVersions />}>
+        <Group gap={12}>
+          {type === 'docker' ? (
+            <a href={`https://hub.docker.com/r/${name}`} target="_blank">
+              <img
+                src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/docker/v/${name}?logo=docker`}
+                alt="image version on docker hub"
+                className="h-[20px]"
+              />
+            </a>
+          ) : (
+            <a href={`https://npmjs.com/package/${name}`} target="_blank">
+              <img
+                src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/npm/v/${name}?logo=npm`}
+                alt="package version on npm"
+                className="h-[20px]"
+              />
+            </a>
+          )}
+
+          <a href={`https://drone.paperplane.cc/${giteaRepo}`} target="_blank">
+            <img
+              className="h-[20px]"
+              src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/drone/build/${giteaRepo}?server=https%3A%2F%2Fdrone.paperplane.cc&style=flat&logo=drone`}
+              alt="CI/CD status"
+            />
+          </a>
+        </Group>
+      </KVTableRow>
+
+      {tech ? (
+        <KVTableRow
+          label="技术栈"
+          icon={<IconCpu />}
+          labelClassName="align-top"
+          fieldClassName="align-top"
+        >
+          <Group gap={12} mt={-2}>
+            {(Array.isArray(tech) ? tech : [tech]).map(Item => (
+              <Item key={Item.name} />
+            ))}
+          </Group>
+        </KVTableRow>
+      ) : null}
+    </KVTable>
+  )
+}

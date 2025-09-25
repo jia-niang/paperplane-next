@@ -1,0 +1,15 @@
+# 本地运行专用 docker compose 文件
+services:
+  paperplane-next-local:
+    image: paperplanecc/baseline-node20:1.0.0
+    container_name: paperplane-next-local
+    working_dir: /paperplane-next
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/paperplane-next
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    command: 'bash -c "yarn && yarn dev"'

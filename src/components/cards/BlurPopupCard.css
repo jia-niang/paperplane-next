@@ -1,0 +1,8 @@
+.blur-popup-card__popup {
+  display: none;
+}
+
+.blur-popup-card:hover .blur-popup-card__popup,
+.blur-popup-card__popup:hover {
+  display: block;
+}

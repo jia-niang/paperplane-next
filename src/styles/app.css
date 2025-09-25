@@ -1,0 +1,29 @@
+@import 'tailwind-preset-mantine';
+@import '@mantine/notifications/styles.css';
+@import './theme.css';
+
+@theme inline {
+  --font-serif: var(--font-swift), var(--font-fzyansong), serif;
+}
+
+@import url('./mdx.css');
+
+html {
+  padding-left: calc(100vw - 100%);
+}
+
+.tabler-icon {
+  display: inline;
+  padding-bottom: 0.2em;
+  vertical-align: middle;
+  width: 1.2em;
+  height: 1.2em;
+
+  &.raw {
+    display: unset;
+    padding-bottom: 0;
+    vertical-align: unset;
+    width: unset;
+    height: unset;
+  }
+}

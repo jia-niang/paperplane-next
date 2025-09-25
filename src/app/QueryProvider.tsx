@@ -1,0 +1,24 @@
+'use client'
+
+import { AuthQueryProvider } from '@daveyplate/better-auth-tanstack'
+import { QueryClientProvider } from '@tanstack/react-query'
+import { createTRPCClient } from '@trpc/client'
+import { ReactNode, useState } from 'react'
+
+import { getQueryClient } from '@/lib/query-client'
+
+import { trpcClientConfig, TRPCProvider } from '../lib/trpc-client'
+import type { AppRouter } from './api/appRouter'
+
+export function QueryProvider(props: Readonly<{ children: ReactNode }>) {
+  const queryClient = getQueryClient()
+  const [trpcClient] = useState(() => createTRPCClient<AppRouter>(trpcClientConfig))
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
+        <AuthQueryProvider>{props.children}</AuthQueryProvider>
+      </TRPCProvider>
+    </QueryClientProvider>
+  )
+}

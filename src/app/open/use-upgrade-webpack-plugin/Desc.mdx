@@ -1,0 +1,5 @@
+`use-upgrade` 会在每次版本发布时触发。想让它更灵活？使用 `use-upgrade-webpack-plugin` 即可。
+
+`use-upgrade-webpack-plugin` 是同 `use-upgrade` 配套的插件，与 Webpack 集成，它允许开发者通过打包命令等方式来设置是否触发 `use-upgrade`，这样在小型版本补丁发布时便可以不触发提醒，避免打扰用户。
+
+> `use-upgrade-webpack-plugin` 的 1.0 正式版即将发布，正式版兼容性更好，配置项更多，且支持通过 Git Commit Message、环境变量等多种方式来控制；<br />还会同步发布配套的 `vite-plugin-use-upgrade` 以适配 Vite 工具链。
