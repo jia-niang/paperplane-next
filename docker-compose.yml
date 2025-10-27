@@ -1,7 +1,7 @@
 # 本地运行专用 docker compose 文件
 services:
   paperplane-next-local:
-    image: paperplanecc/baseline-node20:1.0.0
+    image: paperplanecc/baseline-node20:2025.10.26
     container_name: paperplane-next-local
     working_dir: /paperplane-next
     ports:
