@@ -25,18 +25,22 @@ export interface OpenItemProps {
   type: OpenItemType
   subpath: string
   desc?: ReactNode
+  overrideNameInLink?: string
+  renderShield?: ReactNode
 }
 
 export default function OpenItem(props: OpenItemProps) {
-  const { name, type, subpath, desc, repo, giteaRepo } = props
+  const { name, type, subpath, desc, repo, giteaRepo, overrideNameInLink, renderShield } = props
 
   const pathname = usePathname()
   const current = pathname.match(/^\/open(\/[^/]+)\/?/)?.[1] === subpath
 
+  const nameInLink = overrideNameInLink || name
+
   const popup = (
     <Stack mt={12} gap={12}>
       <Group gap={16} ff="sans-serif" lh={1.2} className="text-sm">
-        {type === 'docker' ? <DockerHubLink repo={name} /> : <NpmLink repo={name} />}
+        {type === 'docker' ? <DockerHubLink repo={nameInLink} /> : <NpmLink repo={nameInLink} />}
         <GitHubLink repo={repo} />
         <GiteaLink repo={giteaRepo || repo} />
         <DroneLink repo={giteaRepo || repo} />
@@ -66,15 +70,19 @@ export default function OpenItem(props: OpenItemProps) {
         <Flex>
           <span className="inline-block min-w-[90px] leading-1">
             <span className="from-ma-100 to-grape-100 relative inline-block h-[26px] w-[80px] rounded-sm bg-gradient-to-r text-center">
-              <img
-                src={
-                  type === 'npm'
-                    ? `https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/npm/v/${name}?style=flat-square&logo=npm&label=%20&color=rgba(255,255,255,0)&logoColor=CB0000`
-                    : `https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/docker/v/${name}?style=flat-square&logo=docker&label=%20&color=rgba(255,255,255,0)`
-                }
-                className="h-[26px]"
-                alt={type === 'npm' ? `package version on npm` : `image version on docker hub`}
-              />
+              {renderShield !== undefined ? (
+                renderShield
+              ) : (
+                <img
+                  src={
+                    type === 'npm'
+                      ? `https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/npm/v/${nameInLink}?style=flat-square&logo=npm&label=%20&color=rgba(255,255,255,0)&logoColor=CB0000`
+                      : `https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/docker/v/${nameInLink}?style=flat-square&logo=docker&label=%20&color=rgba(255,255,255,0)&sort=semver`
+                  }
+                  className="h-[26px]"
+                  alt={type === 'npm' ? `package version on npm` : `image version on docker hub`}
+                />
+              )}
             </span>
           </span>
           <GradientTitle

@@ -11,31 +11,34 @@ export interface OpenDetailTableProps {
   repo: string
   giteaRepo?: string
   tech?: FC | FC[]
+  overrideNameInLink?: string
 }
 
 export function OpenDetailTable(props: OpenDetailTableProps) {
-  const { type, name, repo, giteaRepo = repo, tech } = props
+  const { type, name, repo, giteaRepo = repo, tech, overrideNameInLink } = props
+
+  const nameInLink = overrideNameInLink || name
 
   return (
     <KVTable>
       <KVTableRow label="主页" icon={<IconHome />}>
         {type === 'docker' ? (
-          <DockerHubLink repo={name}>
+          <DockerHubLink repo={nameInLink}>
             <Highlight
-              highlight={`/` + name}
+              highlight={`/` + nameInLink}
               component="span"
               highlightStyles={{ padding: '0 4px', margin: '0 3px', borderRadius: '4px' }}
               inherit
-            >{`hub.docker.com/r/${name}`}</Highlight>
+            >{`hub.docker.com/r/${nameInLink}`}</Highlight>
           </DockerHubLink>
         ) : (
-          <NpmLink repo={name}>
+          <NpmLink repo={nameInLink}>
             <Highlight
-              highlight={`/` + name}
+              highlight={`/` + nameInLink}
               component="span"
               highlightStyles={{ padding: '0 4px', margin: '0 3px', borderRadius: '4px' }}
               inherit
-            >{`npmjs.com/package/${name}`}</Highlight>
+            >{`npmjs.com/package/${nameInLink}`}</Highlight>
           </NpmLink>
         )}
       </KVTableRow>
@@ -50,17 +53,17 @@ export function OpenDetailTable(props: OpenDetailTableProps) {
       <KVTableRow label="版本" icon={<IconVersions />}>
         <Group gap={12}>
           {type === 'docker' ? (
-            <a href={`https://hub.docker.com/r/${name}`} target="_blank">
+            <a href={`https://hub.docker.com/r/${overrideNameInLink}`} target="_blank">
               <img
-                src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/docker/v/${name}?logo=docker`}
+                src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/docker/v/${overrideNameInLink}?logo=docker&sort=semver`}
                 alt="image version on docker hub"
                 className="h-[20px]"
               />
             </a>
           ) : (
-            <a href={`https://npmjs.com/package/${name}`} target="_blank">
+            <a href={`https://npmjs.com/package/${overrideNameInLink}`} target="_blank">
               <img
-                src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/npm/v/${name}?logo=npm`}
+                src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/npm/v/${overrideNameInLink}?logo=npm`}
                 alt="package version on npm"
                 className="h-[20px]"
               />

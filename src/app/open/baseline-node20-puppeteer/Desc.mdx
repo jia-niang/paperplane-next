@@ -1,7 +1,0 @@
-`paperplanecc/baseline-node20-puppeteer` 是一个适用于 Node.js 开发者的 Docker 镜像。<br />
-它用于 PaperPlane.cc 的多个项目，因此这样命名。
-
-此镜像基于 `node:20-slim`，预置了全局安装的 `pnpm`，为 `canvas` 等 Next.js 常用的包预装了相关二进制依赖；<br />
-最大的特色是，它预装了 Chromium 浏览器并为 `puppeteer` 做好了各种配置，开箱即用，且会默认跳过下载浏览器步骤。
-
-_（预置 Chromium 是为了兼容 ARM 平台，因为 Chrome 不支持除了 macOS 以外的任何 ARM 平台。）_

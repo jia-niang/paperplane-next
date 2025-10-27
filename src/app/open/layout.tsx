@@ -60,18 +60,19 @@ export default async function OpenLayout(props: { children: ReactNode }) {
             desc="通过简单的挂载目录，使得可以通过 HTTP 访问 Docker Engine API。"
           />
           <OpenItem
-            name="paperplanecc/baseline-node20"
-            repo="paperplane-docker/baseline-node20"
+            name="paperplanecc/baseline-node"
+            repo="paperplane-docker/baseline-node"
             type="docker"
-            subpath="/baseline-node20"
-            desc="预装 Node.js 20 和 pnpm，并为 canvas 预装依赖项的 Docker 镜像，开箱即用。"
-          />
-          <OpenItem
-            name="paperplanecc/baseline-node20-puppeteer"
-            repo="paperplane-docker/baseline-node20-puppeteer"
-            type="docker"
-            subpath="/baseline-node20-puppeteer"
-            desc="基于上面的 paperplanecc/baseline-node20，额外为 Puppeteer (Chromium) 做了预安装预配置的 Docker 镜像，开箱即用。"
+            subpath="/baseline-node"
+            desc="旨在为 Web 开发者提供一系列开箱即用的预配置的 Node.js 镜像。"
+            overrideNameInLink="paperplanecc/baseline-node20"
+            renderShield={
+              <img
+                src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/docker/v/paperplanecc/baseline-node20?style=flat-square&label=%20&color=rgba(255,255,255,0)&sort=semver`}
+                className="mt-[3px] h-[20px]"
+                alt="image version on docker hub"
+              />
+            }
           />
         </Stack>
       </GridCol>
