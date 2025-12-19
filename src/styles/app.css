@@ -6,7 +6,7 @@
   --font-serif: var(--font-swift), var(--font-fzyansong), serif;
 }
 
-@import url('./mdx.css');
+@import './mdx.css';
 
 html {
   padding-left: calc(100vw - 100%);
