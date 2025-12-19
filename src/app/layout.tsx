@@ -20,6 +20,8 @@ import { fontFZYanSong, fontSourceCodePro, fontSwift } from './fonts'
 
 import '@/styles/app.css'
 
+export const dynamic = 'force-dynamic'
+
 z.config(zhCN())
 
 export const metadata: Metadata = {
