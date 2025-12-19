@@ -2,7 +2,7 @@ kind: pipeline
 name: default
 
 workspace:
-  path: /source
+  path: /paperplane-next
 
 volumes:
   - name: dockersock
