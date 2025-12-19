@@ -12,8 +12,8 @@ const nav = [
   { value: '/demos', label: 'Demos', title: 'Demos' },
   { value: '/awesome', label: 'Awesome', title: 'Awesome · 发现' },
   { value: '/registry', label: '制品库', title: 'Registry · 制品库' },
-  { value: '/res', label: '资源库', title: 'Resource · 资源库' },
-  { value: '/tool', label: '工具库', title: 'Tool · 工具库' },
+  { value: '/res', label: '资源库', title: 'Resource · 资源库', disabled: true },
+  { value: '/tool', label: '工具库', title: 'Tool · 工具库', disabled: true },
 ]
 
 export default function HeaderSectionSelector(props: { className?: string }) {
