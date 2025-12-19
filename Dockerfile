@@ -15,6 +15,6 @@ RUN --mount=type=cache,id=pnpm,target=/paperplane-next/.pnpm-store pnpm i --froz
 
 COPY . /paperplane-next/
 RUN pnpm run db:gen
-RUN pnpm run build:prod
+RUN pnpm run build
 
 CMD [ "pnpm", "run", "start:prod" ]

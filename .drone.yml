@@ -8,6 +8,9 @@ volumes:
   - name: dockersock
     host:
       path: /var/run/docker.sock
+  - name: envfile
+    host:
+      path: /root/project-config/paperplane-next/.env.production.local
 
 trigger:
   branch:
@@ -24,6 +27,8 @@ steps:
     volumes:
       - name: dockersock
         path: /var/run/docker.sock
+      - name: envfile
+        path: /paperplane-next/.env.production.local
     commands:
       - docker build --progress plain --compress -t paperplanecc/paperplane-next:${DRONE_COMMIT_SHA:0:8} .
 
