@@ -8,6 +8,8 @@ WORKDIR /paperplane-next
 ENV NODE_ENV=production
 ENV DO_NOT_TRACK=1
 
+RUN apt-get update -y && apt-get install -y openssl
+
 COPY .docker-deps /paperplane-next
 RUN --mount=type=cache,id=pnpm,target=/paperplane-next/.pnpm-store pnpm i --frozen-lockfile --store-dir /paperplane-next/.pnpm-store --registry=$NPM_REGISTRY
 
