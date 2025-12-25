@@ -12,7 +12,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { Group, Stack, Text } from '@mantine/core'
 import { useMounted } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
-import { IconGripVertical } from '@tabler/icons-react'
+import { IconGripVertical, IconSquareRotatedFilled } from '@tabler/icons-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { CSSProperties, useId, useState } from 'react'
@@ -101,7 +101,7 @@ export default function CatelogItem(props: CatelogItemProps & DraggableWrapperPr
   return (
     <Stack
       className={clsx('rounded-md bg-white/60 backdrop-blur-lg', className)}
-      px={8}
+      px={2}
       py={4}
       gap={0}
       ref={ref}
@@ -111,11 +111,13 @@ export default function CatelogItem(props: CatelogItemProps & DraggableWrapperPr
       <Group gap={4}>
         {edit ? (
           <IconGripVertical size="1em" className="raw cursor-move text-gray-400" {...listeners} />
-        ) : null}
+        ) : (
+          <IconSquareRotatedFilled size="0.5em" className="raw mr-1 cursor-move text-gray-400" />
+        )}
 
         <Text
           style={{ fontSize: isChild ? '14px' : '16px' }}
-          c={isChild ? 'gray.6' : 'gray.8'}
+          c={isChild ? 'gray.6' : 'gray.7'}
           lh={isChild ? 1.2 : 1.4}
           className="cursor-pointer underline-offset-2 hover:underline"
           onClick={() => awesomeScrollIntoViewEmitter.emit('selectId', catelog.id)}
