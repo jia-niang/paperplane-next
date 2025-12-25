@@ -28,7 +28,7 @@ const foldTogglerData = [
 
 export default function AwesomePage() {
   const [searchText, setSearchText] = useState('')
-  const { edit, catelogExpand, setEdit, setSearch, setCatelogExpand, reset } = useAwesome()
+  const { edit, catelogExpand, setEdit, setSearch, setCatelogExpand } = useAwesome()
   const { data: user } = useLoginUser()
 
   const debouncedSetSearch = useDebouncedCallback(setSearch, 200)
@@ -37,7 +37,7 @@ export default function AwesomePage() {
     debouncedSetSearch(input)
   }
 
-  useEffect(() => void reset(), [reset, user])
+  useEffect(() => void useAwesome.getState().reset(), [user])
 
   return (
     <Stack pos="relative">

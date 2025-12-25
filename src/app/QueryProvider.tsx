@@ -6,6 +6,7 @@ import { createTRPCClient } from '@trpc/client'
 import { ReactNode, useState } from 'react'
 
 import { getQueryClient } from '@/lib/query-client'
+import { replaceEqualDeep } from '@/lib/structural-sharing'
 
 import { trpcClientConfig, TRPCProvider } from '../lib/trpc-client'
 import type { AppRouter } from './api/appRouter'
@@ -17,7 +18,9 @@ export function QueryProvider(props: Readonly<{ children: ReactNode }>) {
   return (
     <QueryClientProvider client={queryClient}>
       <TRPCProvider trpcClient={trpcClient} queryClient={queryClient}>
-        <AuthQueryProvider>{props.children}</AuthQueryProvider>
+        <AuthQueryProvider queryOptions={{ structuralSharing: replaceEqualDeep }}>
+          {props.children}
+        </AuthQueryProvider>
       </TRPCProvider>
     </QueryClientProvider>
   )

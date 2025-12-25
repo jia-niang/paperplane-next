@@ -1,6 +1,9 @@
 import { createAuthHooks } from '@daveyplate/better-auth-tanstack'
 import { genericOAuthClient } from 'better-auth/client/plugins'
 import { createAuthClient } from 'better-auth/react'
+import { omit } from 'lodash-es'
+
+import { User } from '@/prisma/client'
 
 export const authClient = createAuthClient({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -29,7 +32,10 @@ export const {
 } = createAuthHooks(authClient)
 
 export function useLoginUser() {
-  return useSession({
-    select: (session: ReturnType<typeof useSession>['data']) => session?.user || null,
-  })
+  return omit(
+    useSession({
+      select: session => session?.user || null,
+    }),
+    ['user', 'session']
+  ) as ReturnType<typeof useSession> & { data?: User | null }
 }

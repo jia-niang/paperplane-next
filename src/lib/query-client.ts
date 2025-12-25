@@ -2,11 +2,14 @@ import { defaultShouldDehydrateQuery, QueryClient } from '@tanstack/react-query'
 import { cache } from 'react'
 import superjson from 'superjson'
 
+import { replaceEqualDeep } from './structural-sharing'
+
 export function makeQueryClient() {
   return new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000,
+        structuralSharing: replaceEqualDeep,
       },
       dehydrate: {
         serializeData: superjson.serialize,
