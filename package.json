@@ -18,6 +18,7 @@
     "db:push": "dotenv -c development -- prisma db push",
     "db:deploy": "dotenv -c production -- prisma migrate deploy",
     "db:reset": "dotenv -c development -- prisma migrate reset",
+    "db:studio": "dotenv -c development -- prisma studio",
     "auth:gen": "pnpm auth:generate",
     "auth:generate": "dotenv -c development -- npx @better-auth/cli generate && npx prettier --write ./prisma/schema.prisma"
   },
