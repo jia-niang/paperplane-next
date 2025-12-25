@@ -112,7 +112,7 @@ export default function CatelogItem(props: CatelogItemProps & DraggableWrapperPr
         {edit ? (
           <IconGripVertical size="1em" className="raw cursor-move text-gray-400" {...listeners} />
         ) : (
-          <IconSquareRotatedFilled size="0.5em" className="raw mr-1 cursor-move text-gray-400" />
+          <IconSquareRotatedFilled size="0.5em" className="raw mr-1 cursor-default text-gray-400" />
         )}
 
         <Text
