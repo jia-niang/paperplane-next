@@ -13,6 +13,7 @@ import {
   Text,
 } from '@mantine/core'
 import clsx from 'clsx'
+import { useState } from 'react'
 
 import { authClient, useSession } from '@/lib/auth-client'
 
@@ -21,9 +22,14 @@ import LoginButton from './LoginButton'
 export default function UserStatus(props: { className?: string }) {
   const { user, isPending, refetch } = useSession()
 
+  const [logoutLoading, setLogoutLoading] = useState(false)
+
   const logoutHandler = () => {
-    authClient.signOut()
-    refetch()
+    setLogoutLoading(true)
+    authClient
+      .signOut()
+      .then(() => void refetch())
+      .catch(() => void setLogoutLoading(false))
   }
 
   return (
@@ -60,7 +66,7 @@ export default function UserStatus(props: { className?: string }) {
 
           {user ? (
             <>
-              <Button variant="light" onClick={logoutHandler}>
+              <Button loading={logoutLoading} variant="light" onClick={logoutHandler}>
                 退出登录
               </Button>
             </>

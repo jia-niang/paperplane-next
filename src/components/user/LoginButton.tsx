@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { authClient } from '@/lib/auth-client'
 
 export interface LoginButtonProps extends ButtonProps {
-  loginSuccess?(): void
+  loginSuccess?(): void | Promise<void>
 }
 
 export default function LoginButton(props: LoginButtonProps) {
@@ -24,10 +24,13 @@ export default function LoginButton(props: LoginButtonProps) {
         setLoading(true)
         authClient.signIn
           .oauth2({ providerId: 'gitea', callbackURL: pathname })
-          .then(() => {
-            loginSuccess?.()
+          .then(async () => {
+            if (loginSuccess) {
+              await loginSuccess()
+              setLoading(false)
+            }
           })
-          .finally(() => {
+          .catch(() => {
             setLoading(false)
           })
       }}
