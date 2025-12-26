@@ -83,7 +83,7 @@ export default function AlphabetPage() {
       </Stack>
 
       <Stack gap={32}>
-        <GradientTitle>工具</GradientTitle>
+        <GradientTitle>PaperPlane 在线服务</GradientTitle>
 
         <AItem
           title="OpenWebUI"
