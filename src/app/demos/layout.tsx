@@ -5,11 +5,13 @@ import {
   AntDTag,
   DumiTag,
   ElementTag,
+  HexoTag,
   MantineTag,
   MongoDBTag,
   MuiTag,
   NestjsTag,
   NextjsTag,
+  NodejsTag,
   PostgreSQLTag,
   PrismaTag,
   ReactTag,
@@ -36,6 +38,15 @@ export default function OpenLayout(props: { children: ReactNode }) {
             devState="更新中"
             projectType="Demo"
             tags={[NextjsTag, MantineTag, TRPCTag, PrismaTag, PostgreSQLTag]}
+          />
+          <DemosItem
+            name="纸飞机的信笺 技术博客"
+            subpath="/paperplane-blog"
+            href="https://paperplane.cc"
+            techType="front"
+            devState="更新中"
+            projectType="Demo"
+            tags={[HexoTag, NodejsTag]}
           />
           <DemosItem
             name="PaperPlane Web Console"

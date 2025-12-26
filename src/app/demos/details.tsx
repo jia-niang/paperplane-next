@@ -8,7 +8,7 @@ import { GiteaLink, GitHubLink } from '@/components/tags/TechLink'
 
 export interface DemosDetailTableProps {
   href: string
-  hrefHighlight: string
+  hrefHighlight?: string
   repo: string
   backendRepo?: string
   tech?: FC | FC[]
