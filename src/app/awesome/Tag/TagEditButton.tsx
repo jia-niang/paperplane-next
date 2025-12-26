@@ -21,9 +21,9 @@ import { pick } from 'lodash-es'
 import { zod4Resolver } from 'mantine-form-zod-resolver'
 import { useEffect, useMemo, useState } from 'react'
 
-import { awesomeTagZod } from '@/app/zod/awesome'
 import { useTRPC } from '@/lib/trpc-client'
 import { AwesomeTag } from '@/prisma/client'
+import { awesomeTagZod } from '@/zod/awesome'
 
 import TagItem from './TagItem'
 

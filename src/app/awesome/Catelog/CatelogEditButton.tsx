@@ -17,9 +17,9 @@ import { pick } from 'lodash-es'
 import { zod4Resolver } from 'mantine-form-zod-resolver'
 import { useEffect, useState } from 'react'
 
-import { awesomeCatelogZod } from '@/app/zod/awesome'
 import { useTRPC } from '@/lib/trpc-client'
 import { AwesomeCatelog } from '@/prisma/client'
+import { awesomeCatelogZod } from '@/zod/awesome'
 
 export interface CatelogEditButtonProps
   extends ButtonProps,

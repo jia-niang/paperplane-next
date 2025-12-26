@@ -2,12 +2,12 @@ import 'server-only'
 
 import { createId } from '@paralleldrive/cuid2'
 
-import { awesomeTagZod } from '@/app/zod/awesome'
-import { deleteZod, resortZod } from '@/app/zod/common'
 import { prisma } from '@/lib/prisma'
 import { publicUpload } from '@/lib/s3-public'
 import { loginProcedure, publicProcedure, router } from '@/lib/trpc'
 import { Prisma } from '@/prisma/client'
+import { awesomeTagZod } from '@/zod/awesome'
+import { deleteZod, resortZod } from '@/zod/common'
 
 async function uploadTagIcon(file: File): Promise<string> {
   return publicUpload(`/awesome/tags/icon/${createId()}`, Buffer.from(await file.arrayBuffer()), {

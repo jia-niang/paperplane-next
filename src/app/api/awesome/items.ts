@@ -1,9 +1,9 @@
 import 'server-only'
 
-import { deleteZod, resortZod } from '@/app/zod/common'
 import { prisma } from '@/lib/prisma'
 import { loginProcedure, publicProcedure, router } from '@/lib/trpc'
 import { AwesomeItem, AwesomeTag, Prisma } from '@/prisma/client'
+import { deleteZod, resortZod } from '@/zod/common'
 
 export interface AwesomeItemResult extends AwesomeItem {
   tags?: AwesomeTag[]
