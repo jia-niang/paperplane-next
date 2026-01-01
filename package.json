@@ -101,14 +101,5 @@
     "tailwind-preset-mantine": "^2.1.0",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2"
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint",
-      "prettier --list-different"
-    ],
-    "*.{css}": [
-      "prettier --list-different"
-    ]
   }
 }
