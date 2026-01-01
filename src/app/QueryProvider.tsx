@@ -12,7 +12,7 @@ import { trpcClientConfig, TRPCProvider } from '../lib/trpc-client'
 import type { AppRouter } from './api/appRouter'
 
 export function QueryProvider(props: Readonly<{ children: ReactNode }>) {
-  const queryClient = getQueryClient()
+  const [queryClient] = useState(() => getQueryClient())
   const [trpcClient] = useState(() => createTRPCClient<AppRouter>(trpcClientConfig))
 
   return (

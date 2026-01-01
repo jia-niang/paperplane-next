@@ -1,5 +1,4 @@
 import { defaultShouldDehydrateQuery, QueryClient } from '@tanstack/react-query'
-import { cache } from 'react'
 import superjson from 'superjson'
 
 import { replaceEqualDeep } from './structural-sharing'
@@ -25,7 +24,7 @@ export function makeQueryClient() {
 
 let clientQueryClientSingleton: QueryClient
 
-export function uncachedGetQueryClient() {
+export function getQueryClient() {
   if (typeof window === 'undefined') {
     return makeQueryClient()
   }
@@ -34,5 +33,3 @@ export function uncachedGetQueryClient() {
   }
   return clientQueryClientSingleton
 }
-
-export const getQueryClient = cache(uncachedGetQueryClient)
