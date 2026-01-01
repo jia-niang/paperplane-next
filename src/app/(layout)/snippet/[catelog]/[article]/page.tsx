@@ -4,8 +4,12 @@ import { ReactNode } from 'react'
 
 import { catelogs } from '../../list'
 
-export async function generateStaticParams() {
-  return catelogs.map(item => ({ catelog: item.key }))
+export async function generateStaticParams(param: { catelog: string }) {
+  return (
+    catelogs
+      .find(item => item.key === param.catelog)
+      ?.article?.map(item => ({ article: item.key })) ?? []
+  )
 }
 
 export default async function SnippetArticlePage(props: {

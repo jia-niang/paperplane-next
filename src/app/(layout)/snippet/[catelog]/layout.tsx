@@ -15,7 +15,7 @@ export async function generateStaticParams() {
 }
 
 export default async function SnippetCatelogLayout(props: {
-  params: Promise<{ catelog: string; article: string }>
+  params: Promise<{ catelog: string }>
   children: ReactNode
 }) {
   const { catelog: catelogKey } = await props.params
