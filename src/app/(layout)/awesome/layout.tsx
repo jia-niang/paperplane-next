@@ -10,6 +10,7 @@ export default async function AwesomeLayout({ children }: { children?: ReactNode
   await Promise.all([
     queryClient.prefetchQuery(trpcServer.awesome.items.tree.queryOptions()),
     queryClient.prefetchQuery(trpcServer.awesome.catelogs.tree.queryOptions()),
+    queryClient.prefetchQuery(trpcServer.awesome.catelogs.list.queryOptions()),
     queryClient.prefetchQuery(trpcServer.awesome.tags.list.queryOptions()),
   ])
 
