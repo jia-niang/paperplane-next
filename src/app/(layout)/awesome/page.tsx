@@ -6,7 +6,7 @@ import { IconListTree, IconMenu2, IconSearch } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
 
 import GradientTitle from '@/components/labels/GradientTitle'
-import { useLoginUser } from '@/lib/auth-client'
+import { useSession } from '@/lib/auth-client'
 
 import Catelog from './Catelog/Catelog'
 import CatelogEditButton from './Catelog/CatelogEditButton'
@@ -29,7 +29,7 @@ const foldTogglerData = [
 export default function AwesomePage() {
   const [searchText, setSearchText] = useState('')
   const { edit, catelogExpand, setEdit, setSearch, setCatelogExpand } = useAwesome()
-  const { data: user } = useLoginUser()
+  const { user } = useSession()
 
   const debouncedSetSearch = useDebouncedCallback(setSearch, 200)
   const searchTextChangeHandler = (input: string) => {
