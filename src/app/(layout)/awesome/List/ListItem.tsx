@@ -76,17 +76,11 @@ export default function ListItem(props: ListItemsProps & DraggableWrapperProps) 
 
       <Tooltip label={starMarkTooltip}>
         {stars >= 5 ? (
-          <IconMichelinStar size="0.7em" className="raw text-ma cursor-pointer leading-[1.3]" />
+          <IconMichelinStar size="0.7em" className="raw text-ma cursor-pointer" />
         ) : stars >= 4 ? (
-          <IconMichelinStar
-            size="0.7em"
-            className="raw cursor-pointer leading-[1.3] text-gray-500"
-          />
+          <IconMichelinStar size="0.7em" className="raw cursor-pointer text-gray-500" />
         ) : (
-          <IconPointFilled
-            size="0.7em"
-            className="raw cursor-pointer leading-[1.3] text-gray-500"
-          />
+          <IconPointFilled size="0.7em" className="raw cursor-pointer text-gray-500" />
         )}
       </Tooltip>
 
