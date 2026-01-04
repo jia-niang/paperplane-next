@@ -69,7 +69,7 @@ export default async function OpenLayout(props: { children: ReactNode }) {
             renderShield={
               <img
                 src={`https://${process.env.NEXT_PUBLIC_SHIELDS_HOST}/docker/v/paperplanecc/baseline-node20?style=flat-square&label=%20&color=rgba(255,255,255,0)&sort=semver`}
-                className="mt-[3px] h-[20px]"
+                className="mx-auto mt-[2px] h-[22px]"
                 alt="image version on docker hub"
               />
             }
