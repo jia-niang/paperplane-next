@@ -50,6 +50,7 @@ export const ModelName = {
   AwesomeCatelog: 'AwesomeCatelog',
   AwesomeTag: 'AwesomeTag',
   AwesomeItem: 'AwesomeItem',
+  Short: 'Short',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
@@ -115,6 +116,21 @@ export const AwesomeItemScalarFieldEnum = {
 
 export type AwesomeItemScalarFieldEnum =
   (typeof AwesomeItemScalarFieldEnum)[keyof typeof AwesomeItemScalarFieldEnum]
+
+export const ShortScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  key: 'key',
+  tag: 'tag',
+  redirectType: 'redirectType',
+  expiredAt: 'expiredAt',
+  public: 'public',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type ShortScalarFieldEnum = (typeof ShortScalarFieldEnum)[keyof typeof ShortScalarFieldEnum]
 
 export const UserScalarFieldEnum = {
   id: 'id',

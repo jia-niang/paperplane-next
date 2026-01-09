@@ -32,6 +32,11 @@ export type AwesomeTag = Prisma.AwesomeTagModel
  */
 export type AwesomeItem = Prisma.AwesomeItemModel
 /**
+ * Model Short
+ * 短网址记录
+ */
+export type Short = Prisma.ShortModel
+/**
  * Model User
  * 用户（由 btter-auth 创建）
  */

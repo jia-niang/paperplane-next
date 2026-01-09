@@ -1,15 +1,14 @@
-import { ColorSchemeScript, mantineHtmlProps, MantineProvider } from '@mantine/core'
-import { ModalsProvider } from '@mantine/modals'
-import { Notifications } from '@mantine/notifications'
+import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core'
+import '@mantine/dates/styles.css'
 import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { ReactNode } from 'react'
 import * as z from 'zod'
 import { zhCN } from 'zod/locales'
 
-import appTheme from '@/app/theme'
+import '@/lib/dayjs'
 
-import { QueryProvider } from './QueryProvider'
+import ClientProvider from './ClientProvider'
 import { fontFZYanSong, fontSourceCodePro, fontSwift } from './fonts'
 
 import '@/styles/app.css'
@@ -42,12 +41,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       </head>
 
       <body style={{ marginRight: '0 !important' }}>
-        <QueryProvider>
-          <MantineProvider theme={appTheme}>
-            <ModalsProvider>{children}</ModalsProvider>
-            <Notifications />
-          </MantineProvider>
-        </QueryProvider>
+        <ClientProvider>{children}</ClientProvider>
       </body>
     </html>
   )

@@ -32,7 +32,10 @@ const fixedNav = [
   { value: '/registry', label: '制品库', title: 'Registry · 制品库' },
 ]
 
-const foldNav = [{ value: '/snippet', label: '样板与配置', title: 'Snippet · 样板与配置' }]
+const foldNav = [
+  { value: '/snippet', label: '样板与配置', title: 'Snippet · 样板与配置' },
+  { value: '/short', label: '短链接', title: 'Short · 短链接服务' },
+]
 
 const allNav = [...fixedNav, ...foldNav]
 

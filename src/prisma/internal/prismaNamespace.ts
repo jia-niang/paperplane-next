@@ -378,6 +378,7 @@ export const ModelName = {
   AwesomeCatelog: 'AwesomeCatelog',
   AwesomeTag: 'AwesomeTag',
   AwesomeItem: 'AwesomeItem',
+  Short: 'Short',
   User: 'User',
   Session: 'Session',
   Account: 'Account',
@@ -406,6 +407,7 @@ export type TypeMap<
       | 'awesomeCatelog'
       | 'awesomeTag'
       | 'awesomeItem'
+      | 'short'
       | 'user'
       | 'session'
       | 'account'
@@ -634,6 +636,80 @@ export type TypeMap<
         count: {
           args: Prisma.AwesomeItemCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.AwesomeItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    Short: {
+      payload: Prisma.$ShortPayload<ExtArgs>
+      fields: Prisma.ShortFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ShortFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ShortFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>
+        }
+        findFirst: {
+          args: Prisma.ShortFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ShortFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>
+        }
+        findMany: {
+          args: Prisma.ShortFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>[]
+        }
+        create: {
+          args: Prisma.ShortCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>
+        }
+        createMany: {
+          args: Prisma.ShortCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ShortCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>[]
+        }
+        delete: {
+          args: Prisma.ShortDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>
+        }
+        update: {
+          args: Prisma.ShortUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>
+        }
+        deleteMany: {
+          args: Prisma.ShortDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ShortUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ShortUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>[]
+        }
+        upsert: {
+          args: Prisma.ShortUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ShortPayload>
+        }
+        aggregate: {
+          args: Prisma.ShortAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateShort>
+        }
+        groupBy: {
+          args: Prisma.ShortGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShortGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ShortCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ShortCountAggregateOutputType> | number
         }
       }
     }
@@ -1016,6 +1092,21 @@ export const AwesomeItemScalarFieldEnum = {
 export type AwesomeItemScalarFieldEnum =
   (typeof AwesomeItemScalarFieldEnum)[keyof typeof AwesomeItemScalarFieldEnum]
 
+export const ShortScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  key: 'key',
+  tag: 'tag',
+  redirectType: 'redirectType',
+  expiredAt: 'expiredAt',
+  public: 'public',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type ShortScalarFieldEnum = (typeof ShortScalarFieldEnum)[keyof typeof ShortScalarFieldEnum]
+
 export const UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -1127,6 +1218,22 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+
+/**
+ * Reference to a field of type 'ShortRedirectType'
+ */
+export type EnumShortRedirectTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'ShortRedirectType'
+>
+
+/**
+ * Reference to a field of type 'ShortRedirectType[]'
+ */
+export type ListEnumShortRedirectTypeFieldRefInput<$PrismaModel> = FieldRefInputType<
+  $PrismaModel,
+  'ShortRedirectType[]'
+>
 
 /**
  * Reference to a field of type 'Boolean'
@@ -1249,6 +1356,7 @@ export type GlobalOmitConfig = {
   awesomeCatelog?: Prisma.AwesomeCatelogOmit
   awesomeTag?: Prisma.AwesomeTagOmit
   awesomeItem?: Prisma.AwesomeItemOmit
+  short?: Prisma.ShortOmit
   user?: Prisma.UserOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit

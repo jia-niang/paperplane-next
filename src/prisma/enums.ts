@@ -8,5 +8,10 @@
  * 🟢 You can import this file directly.
  */
 
-// This file is empty because there are no enums in the schema.
-export {}
+export const ShortRedirectType = {
+  PERMANENTLY: 'PERMANENTLY',
+  TEMPORARY: 'TEMPORARY',
+  JAVASCRIPT: 'JAVASCRIPT',
+} as const
+
+export type ShortRedirectType = (typeof ShortRedirectType)[keyof typeof ShortRedirectType]

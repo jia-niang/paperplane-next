@@ -23,6 +23,9 @@ const nextConfig: NextConfig = {
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  redirects() {
+    return [{ source: '/alphabet', destination: '/a', statusCode: 302 }]
+  },
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
