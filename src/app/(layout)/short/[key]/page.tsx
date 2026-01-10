@@ -10,7 +10,7 @@ import { use } from 'react'
 import Loading from '@/components/layouts/Loading'
 import { useTRPC } from '@/lib/trpc-client'
 
-import ShortDetail from '../ShortDetail'
+import ShortDetail from '../_short-info/ShortDetail'
 
 export default function ShortInfoPage(props: PageProps<'/short/[key]'>) {
   const { key } = use(props.params)

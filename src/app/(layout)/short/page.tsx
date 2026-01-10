@@ -2,9 +2,9 @@
 
 import { Grid, GridCol } from '@mantine/core'
 
-import ShortApi from './ShortApi'
-import ShortForm from './ShortForm'
-import ShortList from './ShortList'
+import ShortApi from './_short-api/ShortApi'
+import ShortForm from './_short-info/ShortForm'
+import ShortList from './_short-list/ShortList'
 
 export default function ShortPage() {
   return (

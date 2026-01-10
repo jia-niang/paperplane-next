@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/navigation'
 import { use, useEffect, useState } from 'react'
 
-import ShortDetail from '@/app/(layout)/short/ShortDetail'
+import ShortDetail from '@/app/(layout)/short/_short-info/ShortDetail'
 import { useTRPC } from '@/lib/trpc-client'
 
 export default function ShortInfoModal(props: PageProps<'/short/[key]'>) {

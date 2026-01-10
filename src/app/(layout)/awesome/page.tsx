@@ -8,11 +8,11 @@ import { useEffect, useState } from 'react'
 import GradientTitle from '@/components/labels/GradientTitle'
 import { useSession } from '@/lib/auth-client'
 
-import Catelog from './Catelog/Catelog'
-import CatelogEditButton from './Catelog/CatelogEditButton'
-import List from './List/List'
-import ListItemEditButton from './List/ListItemEditButton'
-import TagPanelButton from './Tag/TagPanelButton'
+import Catelog from './_catelog/Catelog'
+import CatelogEditButton from './_catelog/CatelogEditButton'
+import List from './_list/List'
+import ListItemEditButton from './_list/ListItemEditButton'
+import TagPanelButton from './_tag/TagPanelButton'
 import { useAwesome } from './state'
 
 const headerTop = 130 + 16
