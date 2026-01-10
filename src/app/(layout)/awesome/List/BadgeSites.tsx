@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import NextImage from 'next/image'
 import { ReactNode, useMemo } from 'react'
 
-import { AwesomeItemResult } from '@/app/api/awesome/items'
+import { AwesomeItemResult } from '@/app/api/_awesome/items'
 
 export interface BadgeProps {
   awesome: AwesomeItemResult

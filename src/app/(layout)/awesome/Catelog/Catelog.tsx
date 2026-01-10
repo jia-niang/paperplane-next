@@ -8,7 +8,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { useId, useState } from 'react'
 
-import { AwesomeCatelogNode } from '@/app/api/awesome/catelogs'
+import { AwesomeCatelogNode } from '@/app/api/_awesome/catelogs'
 import { useTRPC } from '@/lib/trpc-client'
 
 import { useAwesome } from '../state'

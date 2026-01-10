@@ -21,7 +21,7 @@ import { pick } from 'lodash-es'
 import { zod4Resolver } from 'mantine-form-zod-resolver'
 import { useEffect, useMemo, useState } from 'react'
 
-import { AwesomeItemResult } from '@/app/api/awesome/items'
+import { AwesomeItemResult } from '@/app/api/_awesome/items'
 import { useTRPC } from '@/lib/trpc-client'
 import { AwesomeCatelog } from '@/prisma/client'
 import { awesomeItemZod } from '@/zod/awesome'

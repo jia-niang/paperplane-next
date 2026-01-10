@@ -18,7 +18,7 @@ import clsx from 'clsx'
 import { CSSProperties, useId, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-import { AwesomeCatelogNode } from '@/app/api/awesome/catelogs'
+import { AwesomeCatelogNode } from '@/app/api/_awesome/catelogs'
 import ConfirmButton from '@/components/buttons/ConfirmButton'
 import { DraggableWrapperProps } from '@/components/layouts/Draggable'
 import { useTRPC } from '@/lib/trpc-client'

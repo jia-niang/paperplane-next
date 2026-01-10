@@ -2,7 +2,7 @@ import { Group, Tooltip } from '@mantine/core'
 import clsx from 'clsx'
 import { CSSProperties, ReactNode, useMemo } from 'react'
 
-import { AwesomeItemResult } from '@/app/api/awesome/items'
+import { AwesomeItemResult } from '@/app/api/_awesome/items'
 
 export interface BadgeTagsProps {
   awesome: AwesomeItemResult

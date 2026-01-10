@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { CSSProperties } from 'react'
 
-import { AwesomeItemResult } from '@/app/api/awesome/items'
+import { AwesomeItemResult } from '@/app/api/_awesome/items'
 import ConfirmButton from '@/components/buttons/ConfirmButton'
 import { DraggableWrapperProps } from '@/components/layouts/Draggable'
 import { useTRPC } from '@/lib/trpc-client'
