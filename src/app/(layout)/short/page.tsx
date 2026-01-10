@@ -2,15 +2,11 @@
 
 import { Grid, GridCol } from '@mantine/core'
 
-import NeedLoginTips from '@/components/user/NeedLoginTips'
-import { useSession } from '@/lib/auth-client'
-
+import ShortApi from './ShortApi'
 import ShortForm from './ShortForm'
 import ShortList from './ShortList'
 
 export default function ShortPage() {
-  const { user } = useSession()
-
   return (
     <Grid gutter={32}>
       <GridCol span={4}>
@@ -18,7 +14,11 @@ export default function ShortPage() {
       </GridCol>
 
       <GridCol span={4}>
-        {user ? <ShortForm /> : <NeedLoginTips title="登录后可创建短链接" />}
+        <ShortForm />
+      </GridCol>
+
+      <GridCol span={4}>
+        <ShortApi />
       </GridCol>
     </Grid>
   )

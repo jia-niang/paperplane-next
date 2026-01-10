@@ -3,7 +3,7 @@
 import { Pagination, ScrollArea, Stack, TextInput } from '@mantine/core'
 import { useDebouncedValue } from '@mantine/hooks'
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import GradientTitle from '@/components/labels/GradientTitle'
 import Loading from '@/components/layouts/Loading'
@@ -17,6 +17,8 @@ export default function ShortList() {
   const [page, setPage] = useState(1)
   const [keyword, setKeyword] = useState('')
   const [debouncedKeyword] = useDebouncedValue(keyword, 380)
+
+  useEffect(() => void setPage(1), [debouncedKeyword])
 
   const { data: result, isPending } = useQuery(
     trpc.short.items.list.queryOptions({ keyword: debouncedKeyword, page, pageSize: 10 })

@@ -1,4 +1,3 @@
-
 /// 用户（由 btter-auth 创建）
 model User {
   id            String  @id
@@ -9,6 +8,7 @@ model User {
 
   sessions Session[]
   accounts Account[]
+  apikeys  Apikey[]
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -70,4 +70,37 @@ model Verification {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("verification")
+}
+
+/// 账号 API（由 btter-auth 创建）
+model Apikey {
+  id             String    @id
+  name           String?
+  start          String?
+  prefix         String?
+  key            String
+  refillInterval Int?      @map("refill_interval")
+  refillAmount   Int?      @map("refill_amount")
+  lastRefillAt   DateTime? @map("last_refill_at")
+  enabled        Boolean?  @default(true)
+  requestCount   Int?      @default(0) @map("request_count")
+  remaining      Int?
+  lastRequest    DateTime? @map("last_request")
+  expiresAt      DateTime? @map("expires_at")
+  permissions    String?
+  metadata       String?
+
+  rateLimitEnabled    Boolean? @default(true) @map("rate_limit_enabled")
+  rateLimitTimeWindow Int?     @default(86400000) @map("rate_limit_time_window")
+  rateLimitMax        Int?     @default(10) @map("rate_limit_max")
+
+  userId String @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @map("created_at")
+  updatedAt DateTime @map("updated_at")
+
+  @@index([key])
+  @@index([userId])
+  @@map("apikey")
 }

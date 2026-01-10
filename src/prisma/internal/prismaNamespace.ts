@@ -383,6 +383,7 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  Apikey: 'Apikey',
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,6 +413,7 @@ export type TypeMap<
       | 'session'
       | 'account'
       | 'verification'
+      | 'apikey'
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1009,6 +1011,80 @@ export type TypeMap<
         }
       }
     }
+    Apikey: {
+      payload: Prisma.$ApikeyPayload<ExtArgs>
+      fields: Prisma.ApikeyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ApikeyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ApikeyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
+        }
+        findFirst: {
+          args: Prisma.ApikeyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ApikeyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
+        }
+        findMany: {
+          args: Prisma.ApikeyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>[]
+        }
+        create: {
+          args: Prisma.ApikeyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
+        }
+        createMany: {
+          args: Prisma.ApikeyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ApikeyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>[]
+        }
+        delete: {
+          args: Prisma.ApikeyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
+        }
+        update: {
+          args: Prisma.ApikeyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
+        }
+        deleteMany: {
+          args: Prisma.ApikeyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ApikeyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ApikeyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>[]
+        }
+        upsert: {
+          args: Prisma.ApikeyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApikeyPayload>
+        }
+        aggregate: {
+          args: Prisma.ApikeyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateApikey>
+        }
+        groupBy: {
+          args: Prisma.ApikeyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApikeyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ApikeyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApikeyCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1163,6 +1239,33 @@ export const VerificationScalarFieldEnum = {
 
 export type VerificationScalarFieldEnum =
   (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+export const ApikeyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  start: 'start',
+  prefix: 'prefix',
+  key: 'key',
+  refillInterval: 'refillInterval',
+  refillAmount: 'refillAmount',
+  lastRefillAt: 'lastRefillAt',
+  enabled: 'enabled',
+  requestCount: 'requestCount',
+  remaining: 'remaining',
+  lastRequest: 'lastRequest',
+  expiresAt: 'expiresAt',
+  permissions: 'permissions',
+  metadata: 'metadata',
+  rateLimitEnabled: 'rateLimitEnabled',
+  rateLimitTimeWindow: 'rateLimitTimeWindow',
+  rateLimitMax: 'rateLimitMax',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type ApikeyScalarFieldEnum =
+  (typeof ApikeyScalarFieldEnum)[keyof typeof ApikeyScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',
@@ -1361,6 +1464,7 @@ export type GlobalOmitConfig = {
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  apikey?: Prisma.ApikeyOmit
 }
 
 /* Types for Logging */

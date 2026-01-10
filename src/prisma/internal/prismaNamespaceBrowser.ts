@@ -55,6 +55,7 @@ export const ModelName = {
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification',
+  Apikey: 'Apikey',
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -188,6 +189,33 @@ export const VerificationScalarFieldEnum = {
 
 export type VerificationScalarFieldEnum =
   (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
+
+export const ApikeyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  start: 'start',
+  prefix: 'prefix',
+  key: 'key',
+  refillInterval: 'refillInterval',
+  refillAmount: 'refillAmount',
+  lastRefillAt: 'lastRefillAt',
+  enabled: 'enabled',
+  requestCount: 'requestCount',
+  remaining: 'remaining',
+  lastRequest: 'lastRequest',
+  expiresAt: 'expiresAt',
+  permissions: 'permissions',
+  metadata: 'metadata',
+  rateLimitEnabled: 'rateLimitEnabled',
+  rateLimitTimeWindow: 'rateLimitTimeWindow',
+  rateLimitMax: 'rateLimitMax',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+} as const
+
+export type ApikeyScalarFieldEnum =
+  (typeof ApikeyScalarFieldEnum)[keyof typeof ApikeyScalarFieldEnum]
 
 export const SortOrder = {
   asc: 'asc',

@@ -1,6 +1,7 @@
 'use client'
 
 import {
+  Box,
   Button,
   Checkbox,
   Collapse,
@@ -20,9 +21,12 @@ import { useRouter } from 'next/navigation'
 import { useMemo, useState } from 'react'
 
 import GradientTitle from '@/components/labels/GradientTitle'
+import Loading from '@/components/layouts/Loading'
+import NeedLoginTips from '@/components/user/NeedLoginTips'
+import { useSession } from '@/lib/auth-client'
 import { useTRPC } from '@/lib/trpc-client'
 import { Short, ShortRedirectType } from '@/prisma/browser'
-import { shortItemZod } from '@/zod/short'
+import { addShortItemZod, shortItemZod } from '@/zod/short'
 
 const redirectTypeOptions = [
   { value: ShortRedirectType.PERMANENTLY, label: '永久重定向 (301)' },
@@ -38,6 +42,8 @@ export default function ShortForm() {
   const queryClient = useQueryClient()
   const router = useRouter()
 
+  const { user, isPending: userPending } = useSession()
+
   const mutation = useMutation(trpc.short.items.add.mutationOptions())
 
   const [loading, setLoading] = useState(false)
@@ -49,7 +55,7 @@ export default function ShortForm() {
   const form = useForm<Partial<Short>>({
     mode: 'uncontrolled',
     validate: zod4Resolver(
-      shortItemZod
+      addShortItemZod
         .extend(hasKey ? { key: shortItemZod.shape.key.unwrap() } : {})
         .extend(hasExpiration ? { expiredAt: shortItemZod.shape.expiredAt.unwrap().unwrap() } : {})
     ),
@@ -81,7 +87,7 @@ export default function ShortForm() {
         notifications.show({
           color: 'green',
           title: `操作成功`,
-          message: `已添加短链接，链接码为 “${res.key}”`,
+          message: `已${res.$reuse ? '复用' : '创建新的'}短链接，链接码为 “${res.key}”`,
         })
         router.push(`/short/${res.key}`)
         queryClient.invalidateQueries(trpc.short.items.list.pathFilter())
@@ -102,6 +108,10 @@ export default function ShortForm() {
     setHasExpiration(false)
   }
 
+  if (userPending) {
+    return <Loading />
+  }
+
   return (
     <form
       onSubmit={submitHandler}
@@ -111,7 +121,7 @@ export default function ShortForm() {
       }}
     >
       <Stack pos="relative" gap={16}>
-        <GradientTitle>创建短链接</GradientTitle>
+        <GradientTitle>获取短链接</GradientTitle>
 
         <TextInput
           label="目标 URL"
@@ -121,29 +131,31 @@ export default function ShortForm() {
           {...form.getInputProps('url')}
         />
 
-        <Checkbox
-          label="自定义短链接"
-          checked={hasKey}
-          onChange={e => {
-            const checked = e.currentTarget.checked
-            setHasKey(checked)
+        <Box>
+          <Checkbox
+            label="指定自定义短链接"
+            checked={hasKey}
+            onChange={e => {
+              const checked = e.currentTarget.checked
+              setHasKey(checked)
 
-            if (!checked) {
-              form.setFieldValue('key', undefined as any)
-            }
-          }}
-        />
-
-        <Collapse in={hasKey} pl={32} keepMounted>
-          <TextInput
-            label="自定义短链接"
-            placeholder="输入自定义短链接，可由大小写字母和数字组成"
-            description={`${preferURLPrefix}${current.key || ''}`}
-            withAsterisk
-            key={form.key('key')}
-            {...form.getInputProps('key')}
+              if (!checked) {
+                form.setFieldValue('key', undefined as any)
+              }
+            }}
           />
-        </Collapse>
+
+          <Collapse in={hasKey} pl={32} keepMounted>
+            <TextInput
+              label="自定义短链接"
+              placeholder="输入自定义短链接，可由大小写字母和数字组成"
+              description={`${preferURLPrefix}${current.key || ''}`}
+              withAsterisk
+              key={form.key('key')}
+              {...form.getInputProps('key')}
+            />
+          </Collapse>
+        </Box>
 
         <TextInput
           label="标签"
@@ -161,43 +173,58 @@ export default function ShortForm() {
           {...form.getInputProps('redirectType')}
         />
 
-        <Checkbox label="公开展示" key={form.key('public')} {...form.getInputProps('public')} />
+        <Box>
+          <Checkbox
+            label="指定过期时间"
+            description="注：永久重定向不能指定过期时间"
+            checked={hasExpiration}
+            disabled={current.redirectType === ShortRedirectType.PERMANENTLY}
+            onChange={e => {
+              const checked = e.currentTarget.checked
+              setHasExpiration(checked)
+              form.setFieldValue('expiredAt', checked ? dayjs().add(1, 'day').toDate() : null)
+            }}
+          />
+
+          <Collapse in={hasExpiration} pl={32} keepMounted>
+            <DateTimePicker
+              label="过期时间"
+              placeholder="仅在此有效期前短链接有效"
+              description={`有效期：${duration}`}
+              valueFormat="YYYY-MM-DD HH:mm"
+              minDate={now}
+              highlightToday
+              withAsterisk
+              key={form.key('expiredAt')}
+              {...form.getInputProps('expiredAt')}
+            />
+          </Collapse>
+        </Box>
 
         <Checkbox
-          label="指定过期时间"
-          description={
-            current.redirectType === ShortRedirectType.PERMANENTLY
-              ? '永久重定向不能指定过期时间'
-              : undefined
-          }
-          checked={hasExpiration}
-          disabled={current.redirectType === ShortRedirectType.PERMANENTLY}
-          onChange={e => {
-            const checked = e.currentTarget.checked
-            setHasExpiration(checked)
-            form.setFieldValue('expiredAt', checked ? dayjs().add(1, 'day').toDate() : null)
-          }}
+          label="在列表中公开展示"
+          description="非公开的短链接只对已登录用户可见"
+          key={form.key('public')}
+          {...form.getInputProps('public')}
         />
 
-        <Collapse in={hasExpiration} pl={32} keepMounted>
-          <DateTimePicker
-            label="过期时间"
-            placeholder="仅在此有效期前短链接有效"
-            description={`有效期：${duration}`}
-            valueFormat="YYYY-MM-DD HH:mm"
-            minDate={now}
-            highlightToday
-            key={form.key('expiredAt')}
-            {...form.getInputProps('expiredAt')}
-          />
-        </Collapse>
+        <Checkbox
+          label="允许复用现有短链接"
+          description="如果有匹配所有参数的短链接，则直接复用"
+          key={form.key('reuse')}
+          {...form.getInputProps('reuse')}
+        />
 
-        <Group justify="end">
-          <Button type="reset" variant="outline">
-            重置
-          </Button>
-          <Button type="submit">提交</Button>
-        </Group>
+        {user ? (
+          <Group justify="end">
+            <Button type="reset" variant="outline">
+              重置
+            </Button>
+            <Button type="submit">提交</Button>
+          </Group>
+        ) : (
+          <NeedLoginTips title="登录后可获取短链接" />
+        )}
 
         <LoadingOverlay zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} visible={loading} />
       </Stack>

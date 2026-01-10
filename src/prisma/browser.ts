@@ -56,3 +56,8 @@ export type Account = Prisma.AccountModel
  * 验证（由 btter-auth 创建）
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model Apikey
+ * 账号 API（由 btter-auth 创建）
+ */
+export type Apikey = Prisma.ApikeyModel

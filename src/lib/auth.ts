@@ -1,9 +1,9 @@
 import 'server-only'
 
-import { betterAuth } from 'better-auth'
 import { prismaAdapter } from 'better-auth/adapters/prisma'
+import { betterAuth } from 'better-auth/minimal'
 import { nextCookies } from 'better-auth/next-js'
-import { genericOAuth } from 'better-auth/plugins'
+import { genericOAuth, apiKey } from 'better-auth/plugins'
 
 import { prisma } from '@/lib/prisma'
 import { redis } from '@/lib/redis'
@@ -30,6 +30,15 @@ export const auth = betterAuth({
         },
       },
   plugins: [
+    apiKey({
+      storage: 'secondary-storage',
+      fallbackToDatabase: true,
+      enableSessionForAPIKeys: true,
+      apiKeyHeaders: ['X-API-KEY'],
+      rateLimit: { enabled: false },
+      defaultKeyLength: 16,
+      disableKeyHashing: true,
+    }),
     genericOAuth({
       config: [
         {

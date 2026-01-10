@@ -1,6 +1,6 @@
 'use client'
 
-import { Divider, Highlight, Stack, Text } from '@mantine/core'
+import { Button, CopyButton, Divider, Highlight, Stack, Text } from '@mantine/core'
 import { notifications } from '@mantine/notifications'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
@@ -64,10 +64,19 @@ export default function ShortDetail(props: DetailProps) {
           <Highlight
             highlight={short.key}
             highlightStyles={{ padding: '0 4px', margin: '0 3px', borderRadius: '4px' }}
+            component="span"
             inherit
           >
             {preferURLPrefix + short.key}
           </Highlight>
+
+          <CopyButton value={preferURLPrefix + short.key}>
+            {({ copied, copy }) => (
+              <Button ml={4} variant="subtle" size="compact-sm" onClick={copy}>
+                {copied ? '已复制' : '复制'}
+              </Button>
+            )}
+          </CopyButton>
         </KVTableRow>
 
         <KVTableRow label="跳转类型">

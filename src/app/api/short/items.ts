@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { TRPCError } from '@trpc/server'
+import { omit } from 'lodash-es'
 import z from 'zod'
 
 import { prisma } from '@/lib/prisma'
@@ -9,7 +10,7 @@ import { Short } from '@/prisma/client'
 import { ShortRedirectType } from '@/prisma/enums'
 import { ShortFindFirstArgs, ShortWhereInput } from '@/prisma/models'
 import { deleteZod, paginationZod } from '@/zod/common'
-import { shortItemZod } from '@/zod/short'
+import { addShortItemZod, shortItemZod } from '@/zod/short'
 
 import { generateShortKeyByRecord, ShortKeyRecord } from './generateShortKey'
 
@@ -67,48 +68,77 @@ export const items = router({
       return result
     }),
 
-  add: loginProcedure.input(shortItemZod).mutation(async ({ input, ctx }) => {
-    const session = await ctx.getSession()
-    const userId = session!.user.id
+  add: loginProcedure
+    .meta({ openapi: { method: 'POST', path: '/short', protect: true } })
+    .input(addShortItemZod)
+    .output(shortItemZod.extend({ $reuse: z.boolean().optional() }))
+    .mutation(async ({ input, ctx }) => {
+      const session = await ctx.getSession()
+      const userId = session!.user.id
 
-    if (input.expiredAt && input.redirectType === ShortRedirectType.PERMANENTLY) {
-      throw new TRPCError({
-        code: 'UNPROCESSABLE_CONTENT',
-        message: '指定了过期时间的短链接不能使用 “永久重定向” 的跳转方式',
-      })
-    }
+      if (input.expiredAt && input.redirectType === ShortRedirectType.PERMANENTLY) {
+        throw new TRPCError({
+          code: 'UNPROCESSABLE_CONTENT',
+          message: '指定了过期时间的短链接不能使用 “永久重定向” 的跳转方式',
+        })
+      }
 
-    if (input.key) {
-      const exist = await findValidShortItemByKey(input.key)
+      if (input.key) {
+        const sameKey = await prisma.short.findFirst({
+          where: { key: input.key, OR: [{ expiredAt: { gt: new Date() } }, { expiredAt: null }] },
+        })
 
-      if (exist) {
+        if (!sameKey) {
+          return await prisma.short.create({
+            data: { ...omit(input, ['reuse']), key: input.key, userId },
+          })
+        }
+
         if (
-          exist.url === input.url &&
-          exist.redirectType === input.redirectType &&
-          exist.expiredAt === input.expiredAt
+          input.reuse &&
+          sameKey.url === input.url &&
+          sameKey.tag === input.tag &&
+          sameKey.redirectType === input.redirectType &&
+          sameKey.expiredAt === input.expiredAt &&
+          sameKey.public === input.public
         ) {
-          return exist
+          return { ...sameKey, $reuse: true }
         }
 
         throw new TRPCError({
           code: 'CONFLICT',
-          message: `此短链接码 “${exist.key}” 与现有的有效项目 “${exist.url}” 的短链接码重复，请更换短链接码后重试`,
+          message: `此短链接码 “${sameKey.key}” 与现有的短链接码重复，请更换短链接码后重试`,
         })
       }
 
-      return await prisma.short.create({ data: { ...input, key: input.key, userId } })
-    }
+      if (input.reuse) {
+        const same = await prisma.short.findFirst({
+          where: {
+            url: input.url,
+            tag: input.tag,
+            redirectType: input.redirectType,
+            expiredAt: input.expiredAt,
+            public: input.public,
+          },
+        })
 
-    let keyRecord: ShortKeyRecord | undefined = undefined
-    let exist: Short | null = null
+        if (same) {
+          return { ...same, $reuse: true }
+        }
+      }
 
-    do {
-      keyRecord = generateShortKeyByRecord(4, keyRecord)
-      exist = await findValidShortItemByKey(keyRecord.key)
-    } while (exist)
+      let keyRecord: ShortKeyRecord | undefined = undefined
+      let exist: Short | null = null
 
-    return await prisma.short.create({ data: { ...input, key: keyRecord.key, userId } })
-  }),
+      do {
+        keyRecord = generateShortKeyByRecord(4, keyRecord)
+        exist = await findValidShortItemByKey(keyRecord.key)
+      } while (exist)
+
+      return await prisma.short.create({
+        data: { ...omit(input, ['reuse']), key: keyRecord.key, userId },
+      })
+    }),
 
   get: publicProcedure
     .input(z.object({ key: shortItemZod.shape.key.unwrap() }))

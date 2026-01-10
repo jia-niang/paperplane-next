@@ -1,13 +1,15 @@
-import { Blockquote, Code, Divider, Stack } from '@mantine/core'
+import { Blockquote, Code, Divider, Stack, StackProps } from '@mantine/core'
 import clsx from 'clsx'
 import type { MDXComponents } from 'mdx/types'
 
 import GradientTitle from './components/labels/GradientTitle'
 
+export type MDXWrapperProps = StackProps
+
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    wrapper: ({ children, className, style }) => (
-      <Stack gap={16} component="article" className={clsx('mdx', className)} style={style}>
+    wrapper: ({ gap, children, className, style }) => (
+      <Stack gap={gap || 16} component="article" style={style} className={clsx('mdx', className)}>
         {children}
       </Stack>
     ),

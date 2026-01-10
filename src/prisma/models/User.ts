@@ -197,6 +197,7 @@ export type UserWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<'User'> | Date | string
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  apikeys?: Prisma.ApikeyListRelationFilter
   short?: Prisma.ShortListRelationFilter
 }
 
@@ -210,6 +211,7 @@ export type UserOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
+  apikeys?: Prisma.ApikeyOrderByRelationAggregateInput
   short?: Prisma.ShortOrderByRelationAggregateInput
 }
 
@@ -227,6 +229,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<
     updatedAt?: Prisma.DateTimeFilter<'User'> | Date | string
     sessions?: Prisma.SessionListRelationFilter
     accounts?: Prisma.AccountListRelationFilter
+    apikeys?: Prisma.ApikeyListRelationFilter
     short?: Prisma.ShortListRelationFilter
   },
   'id' | 'email'
@@ -268,6 +271,7 @@ export type UserCreateInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  apikeys?: Prisma.ApikeyCreateNestedManyWithoutUserInput
   short?: Prisma.ShortCreateNestedManyWithoutAuthorInput
 }
 
@@ -281,6 +285,7 @@ export type UserUncheckedCreateInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  apikeys?: Prisma.ApikeyUncheckedCreateNestedManyWithoutUserInput
   short?: Prisma.ShortUncheckedCreateNestedManyWithoutAuthorInput
 }
 
@@ -294,6 +299,7 @@ export type UserUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  apikeys?: Prisma.ApikeyUpdateManyWithoutUserNestedInput
   short?: Prisma.ShortUpdateManyWithoutAuthorNestedInput
 }
 
@@ -307,6 +313,7 @@ export type UserUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  apikeys?: Prisma.ApikeyUncheckedUpdateManyWithoutUserNestedInput
   short?: Prisma.ShortUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
@@ -460,6 +467,32 @@ export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
   >
 }
 
+export type UserCreateNestedOneWithoutApikeysInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutApikeysInput,
+    Prisma.UserUncheckedCreateWithoutApikeysInput
+  >
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApikeysInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutApikeysNestedInput = {
+  create?: Prisma.XOR<
+    Prisma.UserCreateWithoutApikeysInput,
+    Prisma.UserUncheckedCreateWithoutApikeysInput
+  >
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutApikeysInput
+  upsert?: Prisma.UserUpsertWithoutApikeysInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<
+    Prisma.XOR<
+      Prisma.UserUpdateToOneWithWhereWithoutApikeysInput,
+      Prisma.UserUpdateWithoutApikeysInput
+    >,
+    Prisma.UserUncheckedUpdateWithoutApikeysInput
+  >
+}
+
 export type UserCreateWithoutShortInput = {
   id: string
   name: string
@@ -470,6 +503,7 @@ export type UserCreateWithoutShortInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  apikeys?: Prisma.ApikeyCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutShortInput = {
@@ -482,6 +516,7 @@ export type UserUncheckedCreateWithoutShortInput = {
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  apikeys?: Prisma.ApikeyUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutShortInput = {
@@ -519,6 +554,7 @@ export type UserUpdateWithoutShortInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  apikeys?: Prisma.ApikeyUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutShortInput = {
@@ -531,6 +567,7 @@ export type UserUncheckedUpdateWithoutShortInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  apikeys?: Prisma.ApikeyUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -542,6 +579,7 @@ export type UserCreateWithoutSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  apikeys?: Prisma.ApikeyCreateNestedManyWithoutUserInput
   short?: Prisma.ShortCreateNestedManyWithoutAuthorInput
 }
 
@@ -554,6 +592,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  apikeys?: Prisma.ApikeyUncheckedCreateNestedManyWithoutUserInput
   short?: Prisma.ShortUncheckedCreateNestedManyWithoutAuthorInput
 }
 
@@ -594,6 +633,7 @@ export type UserUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  apikeys?: Prisma.ApikeyUpdateManyWithoutUserNestedInput
   short?: Prisma.ShortUpdateManyWithoutAuthorNestedInput
 }
 
@@ -606,6 +646,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  apikeys?: Prisma.ApikeyUncheckedUpdateManyWithoutUserNestedInput
   short?: Prisma.ShortUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
@@ -618,6 +659,7 @@ export type UserCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  apikeys?: Prisma.ApikeyCreateNestedManyWithoutUserInput
   short?: Prisma.ShortCreateNestedManyWithoutAuthorInput
 }
 
@@ -630,6 +672,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  apikeys?: Prisma.ApikeyUncheckedCreateNestedManyWithoutUserInput
   short?: Prisma.ShortUncheckedCreateNestedManyWithoutAuthorInput
 }
 
@@ -670,6 +713,7 @@ export type UserUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  apikeys?: Prisma.ApikeyUpdateManyWithoutUserNestedInput
   short?: Prisma.ShortUpdateManyWithoutAuthorNestedInput
 }
 
@@ -682,6 +726,87 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  apikeys?: Prisma.ApikeyUncheckedUpdateManyWithoutUserNestedInput
+  short?: Prisma.ShortUncheckedUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserCreateWithoutApikeysInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  short?: Prisma.ShortCreateNestedManyWithoutAuthorInput
+}
+
+export type UserUncheckedCreateWithoutApikeysInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  short?: Prisma.ShortUncheckedCreateNestedManyWithoutAuthorInput
+}
+
+export type UserCreateOrConnectWithoutApikeysInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutApikeysInput,
+    Prisma.UserUncheckedCreateWithoutApikeysInput
+  >
+}
+
+export type UserUpsertWithoutApikeysInput = {
+  update: Prisma.XOR<
+    Prisma.UserUpdateWithoutApikeysInput,
+    Prisma.UserUncheckedUpdateWithoutApikeysInput
+  >
+  create: Prisma.XOR<
+    Prisma.UserCreateWithoutApikeysInput,
+    Prisma.UserUncheckedCreateWithoutApikeysInput
+  >
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutApikeysInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<
+    Prisma.UserUpdateWithoutApikeysInput,
+    Prisma.UserUncheckedUpdateWithoutApikeysInput
+  >
+}
+
+export type UserUpdateWithoutApikeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  short?: Prisma.ShortUpdateManyWithoutAuthorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutApikeysInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   short?: Prisma.ShortUncheckedUpdateManyWithoutAuthorNestedInput
 }
 
@@ -692,6 +817,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
 export type UserCountOutputType = {
   sessions: number
   accounts: number
+  apikeys: number
   short: number
 }
 
@@ -700,6 +826,7 @@ export type UserCountOutputTypeSelect<
 > = {
   sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  apikeys?: boolean | UserCountOutputTypeCountApikeysArgs
   short?: boolean | UserCountOutputTypeCountShortArgs
 }
 
@@ -736,6 +863,15 @@ export type UserCountOutputTypeCountAccountsArgs<
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountApikeysArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  where?: Prisma.ApikeyWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountShortArgs<
   ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
 > = {
@@ -755,6 +891,7 @@ export type UserSelect<
     updatedAt?: boolean
     sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
     accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+    apikeys?: boolean | Prisma.User$apikeysArgs<ExtArgs>
     short?: boolean | Prisma.User$shortArgs<ExtArgs>
     _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
   },
@@ -812,6 +949,7 @@ export type UserInclude<
 > = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  apikeys?: boolean | Prisma.User$apikeysArgs<ExtArgs>
   short?: boolean | Prisma.User$shortArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -829,6 +967,7 @@ export type $UserPayload<
   objects: {
     sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
+    apikeys: Prisma.$ApikeyPayload<ExtArgs>[]
     short: Prisma.$ShortPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<
@@ -1372,6 +1511,17 @@ export interface Prisma__UserClient<
       >
     | Null
   >
+  apikeys<T extends Prisma.User$apikeysArgs<ExtArgs> = {}>(
+    args?: Prisma.Subset<T, Prisma.User$apikeysArgs<ExtArgs>>
+  ): Prisma.PrismaPromise<
+    | runtime.Types.Result.GetResult<
+        Prisma.$ApikeyPayload<ExtArgs>,
+        T,
+        'findMany',
+        GlobalOmitOptions
+      >
+    | Null
+  >
   short<T extends Prisma.User$shortArgs<ExtArgs> = {}>(
     args?: Prisma.Subset<T, Prisma.User$shortArgs<ExtArgs>>
   ): Prisma.PrismaPromise<
@@ -1885,6 +2035,32 @@ export type User$accountsArgs<
   take?: number
   skip?: number
   distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.apikeys
+ */
+export type User$apikeysArgs<
+  ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs,
+> = {
+  /**
+   * Select specific fields to fetch from the Apikey
+   */
+  select?: Prisma.ApikeySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Apikey
+   */
+  omit?: Prisma.ApikeyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ApikeyInclude<ExtArgs> | null
+  where?: Prisma.ApikeyWhereInput
+  orderBy?: Prisma.ApikeyOrderByWithRelationInput | Prisma.ApikeyOrderByWithRelationInput[]
+  cursor?: Prisma.ApikeyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ApikeyScalarFieldEnum | Prisma.ApikeyScalarFieldEnum[]
 }
 
 /**

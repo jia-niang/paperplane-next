@@ -15,3 +15,7 @@ export const shortItemZod = z.object({
   expiredAt: z.coerce.date().min(new Date(), '过期时间不能早于当前时间').nullish().default(null),
   public: z.boolean().optional().default(false),
 })
+
+export const addShortItemZod = shortItemZod.extend({
+  reuse: z.boolean().optional().default(false),
+})

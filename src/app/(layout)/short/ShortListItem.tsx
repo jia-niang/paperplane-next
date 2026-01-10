@@ -42,16 +42,16 @@ export default function ShortListItem(props: ShortListItemProps) {
 
   return (
     <BlurPopupCard
-      py={12}
-      px={16}
+      px={12}
+      py={8}
       className="from-lb-50 hover:from-lb-100 cursor-pointer rounded-md bg-gradient-to-r to-transparent"
       popupClassName="from-lb-100 bg-gradient-to-r via-lb-100 to-transparent"
-      popupPx={16}
-      popupPy={12}
-      right={32}
+      popupPx={12}
+      popupPy={8}
+      right={24}
     >
-      <Stack onClick={clickHandler} gap={4}>
-        <Group gap={8} className="text-[16px] text-[#777]">
+      <Stack onClick={clickHandler} gap={2}>
+        <Group gap={8} className="text-[14px] text-[#777]">
           <Highlight
             highlight={short.key}
             highlightStyles={{ padding: '0 4px', margin: '0 3px', borderRadius: '4px' }}
@@ -100,13 +100,13 @@ export default function ShortListItem(props: ShortListItemProps) {
         </Group>
 
         <Group gap={4} className="flex-nowrap">
-          <IconArrowRight size="18px" className="raw text-ma shrink-0" />
+          <IconArrowRight size="16px" className="raw text-ma shrink-0" />
 
           <Link onClick={e => void e.stopPropagation()} href={short.url} target="_blank">
             <Text
               className="text-ma cursor-pointer font-serif hover:underline"
               lineClamp={1}
-              size="18px"
+              size="16px"
               lh={1.2}
             >
               {trimEnd(targetURL.host + targetURL.pathname + targetURL.search, '/')}
