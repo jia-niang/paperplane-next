@@ -104,7 +104,7 @@ export default function ShortListItem(props: ShortListItemProps) {
 
           <Link onClick={e => void e.stopPropagation()} href={short.url} target="_blank">
             <Text
-              className="text-ma cursor-pointer font-serif hover:underline"
+              className="text-ma mr-8 cursor-pointer font-serif break-all hover:underline"
               lineClamp={1}
               size="16px"
               lh={1.2}

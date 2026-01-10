@@ -52,15 +52,15 @@ export default function ShortDetail(props: DetailProps) {
   return (
     <Stack className={className} style={style}>
       <KVTable>
-        <KVTableRow label="链接指向">
+        <KVTableRow label="链接指向" labelClassName="align-top">
           <Text inherit className="text-ma hover:underline">
-            <Link href={short.url} target="_blank">
+            <Link className="break-all" href={short.url} target="_blank">
               {short.url}
             </Link>
           </Text>
         </KVTableRow>
 
-        <KVTableRow label="短链">
+        <KVTableRow label="短链" labelClassName="align-top">
           <Highlight
             highlight={short.key}
             highlightStyles={{ padding: '0 4px', margin: '0 3px', borderRadius: '4px' }}
