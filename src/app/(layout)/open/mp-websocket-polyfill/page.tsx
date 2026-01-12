@@ -2,7 +2,7 @@ import { Divider, Stack } from '@mantine/core'
 
 import GradientTitle from '@/components/labels/GradientTitle'
 
-import { OpenDetailTable } from '../details'
+import { OpenDetailTable } from '../OpenDetailTable'
 import Desc from './Desc.mdx'
 
 const name = 'mp-websocket-polyfill'

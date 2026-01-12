@@ -1,9 +1,8 @@
 import { Grid, GridCol, Stack } from '@mantine/core'
-import { ReactNode } from 'react'
 
 import OpenItem from './OpenItem'
 
-export default async function OpenLayout(props: { children: ReactNode }) {
+export default async function OpenLayout(props: LayoutProps<'/open'>) {
   return (
     <Grid gutter={48}>
       <GridCol pos="relative" span={4}>

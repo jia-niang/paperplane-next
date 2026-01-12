@@ -1,10 +1,9 @@
 import { Grid, GridCol, Stack } from '@mantine/core'
-import { ReactNode } from 'react'
 
 import { SnippetCatelog } from './SnippetCatelog'
 import { catelogs } from './list'
 
-export default function SnippetLayout(props: { children: ReactNode }) {
+export default function SnippetLayout(props: LayoutProps<'/snippet'>) {
   return (
     <Grid gutter={48}>
       <GridCol pos="relative" span={3}>

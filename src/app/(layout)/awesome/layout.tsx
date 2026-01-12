@@ -1,13 +1,12 @@
 import { prefetchSession } from '@daveyplate/better-auth-tanstack/server'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { headers } from 'next/headers'
-import { ReactNode } from 'react'
 
 import { auth } from '@/lib/auth'
 import { getQueryClient } from '@/lib/query-client'
 import { trpcServer } from '@/lib/trpc-server'
 
-export default async function AwesomeLayout({ children }: { children?: ReactNode }) {
+export default async function AwesomeLayout({ children }: LayoutProps<'/awesome'>) {
   const queryClient = getQueryClient()
 
   await Promise.all([

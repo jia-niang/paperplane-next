@@ -1,5 +1,4 @@
 import { Grid, GridCol, Stack } from '@mantine/core'
-import { ReactNode } from 'react'
 
 import {
   AntDTag,
@@ -24,7 +23,7 @@ import {
 
 import DemosItem from './DemosItem'
 
-export default function OpenLayout(props: { children: ReactNode }) {
+export default function OpenLayout(props: LayoutProps<'/demos'>) {
   return (
     <Grid gutter={48}>
       <GridCol pos="relative" span={4}>

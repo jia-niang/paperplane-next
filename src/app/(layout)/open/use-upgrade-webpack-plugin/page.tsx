@@ -3,7 +3,7 @@ import { Divider, Stack } from '@mantine/core'
 import GradientTitle from '@/components/labels/GradientTitle'
 import { WebpackTag } from '@/components/tags/TechTag'
 
-import { OpenDetailTable } from '../details'
+import { OpenDetailTable } from '../OpenDetailTable'
 import Desc from './Desc.mdx'
 
 const name = 'use-upgrade-webpack-plugin'

@@ -1,11 +1,6 @@
-import { PropsWithChildren, ReactNode } from 'react'
-
 import GlobalLayout from '@/components/layouts/GlobalLayout'
 
-export default async function RootUILayout({
-  children,
-  modal,
-}: PropsWithChildren<{ modal: ReactNode }>) {
+export default async function RootUILayout({ children, modal }: LayoutProps<'/'>) {
   return (
     <GlobalLayout>
       {children}

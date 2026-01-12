@@ -3,7 +3,7 @@
 import { Flex, Group, Image, SegmentedControl, Stack, Text } from '@mantine/core'
 import NextImage from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import { ReactNode, useEffect, useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 const vendorOptions = [
   {
@@ -37,7 +37,7 @@ const registryTypeOptions = [
   { label: '私有制品库', value: 'registry' },
 ]
 
-export default function OpenLayout(props: { children: ReactNode }) {
+export default function OpenLayout(props: LayoutProps<'/registry'>) {
   const pathname = usePathname()
   const router = useRouter()
 
