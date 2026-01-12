@@ -8,10 +8,13 @@ export interface LoadingProps {
 }
 
 export default function Loading(props: LoadingProps) {
-  const { h = [12, 12, 12, 12, 12, 12], w = [0, 0, 0.8, 0, 0, 0.75], className } = props
+  const { h: _h, w: _w, className } = props
+
+  const h = _h || [12, 12, 12, 12, 12, 12]
+  const w = _w || [0, 0, 0.8, 0, 0, 0.75]
 
   const list = Array.from(
-    new Array(Math.max(h.length, w.length)),
+    new Array(Math.max((_h || []).length, (_w || []).length)),
     (_value, idx) =>
       ({
         height: h[idx] || 12,
