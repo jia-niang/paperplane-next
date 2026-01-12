@@ -22,7 +22,7 @@ export default function ShortInfoPage(props: PageProps<'/short/[key]'>) {
   return (
     <Stack>
       <Group>
-        <Link className="" href="/short">
+        <Link href="/short">
           <Button leftSection={<IconChevronLeft className="raw" size={14} />} variant="light">
             返回短链接页面
           </Button>
