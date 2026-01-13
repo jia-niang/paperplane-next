@@ -1,4 +1,5 @@
-import { createTheme } from '@mantine/core'
+import { Container, createTheme } from '@mantine/core'
+import clsx from 'clsx'
 
 export default createTheme({
   primaryColor: 'lb',
@@ -58,5 +59,10 @@ export default createTheme({
         label: 'font-normal',
       },
     },
+    Container: Container.extend({
+      classNames: (_, { size }) => ({
+        root: clsx({ 'container--responsive': size === 'responsive' }),
+      }),
+    }),
   },
 })

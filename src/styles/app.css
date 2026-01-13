@@ -12,6 +12,14 @@ html {
   padding-left: calc(100vw - 100%);
 }
 
+.container--responsive {
+  max-width: 1200px;
+
+  @media (min-width: 1800px) {
+    max-width: 1440px;
+  }
+}
+
 .tabler-icon {
   display: inline;
   padding-bottom: 0.2em;

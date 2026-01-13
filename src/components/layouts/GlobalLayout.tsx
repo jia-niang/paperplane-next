@@ -22,7 +22,7 @@ export default function GlobalLayout(props: { children: ReactNode }) {
           paddingLeft: 'calc(100vw - 100%)',
         }}
       >
-        <Container size={1440}>
+        <Container size="responsive">
           <Flex>
             <HeaderSectionSelector />
             <UserStatus className="ml-auto" />
@@ -31,7 +31,7 @@ export default function GlobalLayout(props: { children: ReactNode }) {
       </AppShellHeader>
 
       <AppShellMain>
-        <Container size={1440}>{props.children}</Container>
+        <Container size="responsive">{props.children}</Container>
       </AppShellMain>
     </AppShell>
   )
