@@ -37,7 +37,7 @@ export default function DemosItem(props: DemosItemProps) {
     () => (
       <Stack mt={8} gap={8}>
         <KVTable>
-          <KVTableRow label="地址">
+          <KVTableRow label="地址" labelClassName="leading-[1.6]" className="align-top">
             <Link href={href} target="_blank">
               <Highlight
                 component="span"
@@ -46,7 +46,7 @@ export default function DemosItem(props: DemosItemProps) {
                 c="gray.6"
                 ff="sans-serif"
                 className="cursor-default text-sm hover:cursor-pointer hover:underline"
-                lh={1.2}
+                lh={1.6}
                 inherit
               >
                 {href.replace('https://', '')}
