@@ -51,7 +51,7 @@ function DynamicNavLink(props: { href: string; span?: GridColProps['span']; chil
     <GridCol span={span || 6}>
       <Group
         className={clsx(
-          'cursor-pointer flex-nowrap items-center rounded-sm border-2 border-solid px-3 py-2',
+          'cursor-pointer flex-nowrap items-center rounded-sm border-2 border-solid px-3 py-2 font-sans',
           isActive
             ? 'border-ma bg-gray-50 text-gray-800'
             : 'border-gray-50 bg-gray-50 shadow hover:border-gray-100 hover:bg-gray-100'
@@ -157,7 +157,6 @@ export default function HeaderSectionSelector(props: { className?: string }) {
           }
         }}
         withItemsBorders={false}
-        className="font-serif"
         classNames={{
           label: 'px-4',
           indicator: 'bg-gradient-to-r from-ma to-lb',
