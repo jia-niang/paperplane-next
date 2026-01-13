@@ -169,7 +169,6 @@ export default function HeaderSectionSelector(props: { className?: string }) {
           className="font-serif"
           gradient={{ from: 'ma', to: 'lb' }}
           size="xl"
-          component="span"
           variant="gradient"
         >
           PaperPlane {section.title}
