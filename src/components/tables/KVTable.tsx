@@ -39,17 +39,15 @@ export function KVTableRow(props: KVTableRowProps) {
   return (
     <TableTr className={className}>
       <TableTd
-        c="gray.9"
-        ff="sans-serif"
-        w={0}
-        pr={8}
-        lh={1.2}
-        className={clsx(labelClassName, 'cursor-default text-nowrap')}
+        className={clsx(
+          'w-0 cursor-default pr-2 leading-[1.6] text-nowrap text-gray-900',
+          labelClassName
+        )}
       >
         {icon} {label}：
       </TableTd>
 
-      <TableTd c="gray.6" ff="sans-serif" lh={1.2} className={clsx(fieldClassName, '')}>
+      <TableTd className={clsx('font-sans leading-[1.2] text-gray-600', fieldClassName)}>
         {children}
       </TableTd>
     </TableTr>
