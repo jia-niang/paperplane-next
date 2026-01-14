@@ -6,21 +6,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import clsx from 'clsx'
 import { CSSProperties, useId, useMemo, useState } from 'react'
 
-import { AwesomeItemResult } from '@/app/api/_awesome/items'
+import { AwesomeItemResult, AwesomeTreeResult } from '@/app/api/_awesome/items'
 import { useTRPC } from '@/lib/trpc-client'
-import { AwesomeCatelog } from '@/prisma/client'
 
 import { useAwesome } from '../state'
 import ListItem, { DraggableListItem } from './ListItem'
 import ListItemEditButton from './ListItemEditButton'
 
-interface CatelogInput extends AwesomeCatelog {
-  parent?: CatelogInput
-  underAwesomes: AwesomeItemResult[]
-}
-
 export interface ListItemGroupProps {
-  catelog: CatelogInput
+  catelog: AwesomeTreeResult
   edit?: boolean
   className?: string
   style?: CSSProperties

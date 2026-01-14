@@ -2,9 +2,14 @@ import 'server-only'
 
 import { prisma } from '@/lib/prisma'
 import { loginProcedure, publicProcedure, router } from '@/lib/trpc'
-import { AwesomeItem, Prisma } from '@/prisma/client'
+import { AwesomeCatelog, AwesomeItem, Prisma } from '@/prisma/client'
 import { awesomeItemZod } from '@/zod/awesome'
 import { deleteZod, idZod, resortZod } from '@/zod/common'
+
+export type AwesomeTreeResult = AwesomeCatelog & {
+  underAwesomes: Omit<AwesomeItemResult, 'underAwesomes'>[]
+  parent?: Omit<AwesomeTreeResult, 'parent'>
+}
 
 export type AwesomeItemResult = Awaited<ReturnType<typeof items.get>>
 
@@ -53,7 +58,7 @@ export const items = router({
       } as (typeof result)[0])
     }
 
-    return result
+    return result as AwesomeTreeResult[]
   }),
 
   get: publicProcedure.input(idZod).query(async ({ input }) => {
