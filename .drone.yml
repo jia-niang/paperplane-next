@@ -56,8 +56,9 @@ steps:
     image: appleboy/drone-ssh
     settings:
       host:
-        - 'paperplane.cc'
-      username: root
+        from_secret: DEPLOY_SSH_HOST
+      username:
+        from_secret: DEPLOY_SSH_USER
       key:
         from_secret: DEPLOY_SSH_PRIKEY
       command_timeout: 5m
@@ -72,8 +73,9 @@ steps:
     image: appleboy/drone-ssh
     settings:
       host:
-        - 'paperplane.cc'
-      username: root
+        from_secret: DEPLOY_SSH_HOST
+      username:
+        from_secret: DEPLOY_SSH_USER
       key:
         from_secret: DEPLOY_SSH_PRIKEY
       command_timeout: 20m
