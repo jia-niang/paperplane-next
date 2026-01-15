@@ -7,7 +7,6 @@ import {
   HexoTag,
   MantineTag,
   MongoDBTag,
-  MuiTag,
   NestjsTag,
   NextjsTag,
   NodejsTag,
@@ -76,16 +75,6 @@ export default function OpenLayout(props: LayoutProps<'/demos'>) {
             devState="2018 (实习)"
             projectType="Demo"
             tags={[VueTag, ElementTag, RestifyTag, MongoDBTag]}
-          />
-          <DemosItem
-            name="核酸登记 Demo"
-            subpath="/hospital"
-            href="https://hospital.paperplane.cc"
-            hrefHighlight="hospital."
-            techType="full"
-            devState="2022"
-            projectType="Demo"
-            tags={[ReactTag, MuiTag, RestifyTag, MongoDBTag]}
           />
           <DemosItem
             name="下班倒计时创意工具"
