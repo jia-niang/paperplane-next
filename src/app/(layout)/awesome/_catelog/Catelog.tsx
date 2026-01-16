@@ -11,14 +11,11 @@ import { useId, useState } from 'react'
 import { AwesomeCatelogNode } from '@/app/api/_awesome/catelogs'
 import { useTRPC } from '@/lib/trpc-client'
 
-import { useAwesome } from '../state'
 import CatelogItem, { DraggableCatelogItem } from './CatelogItem'
 
 export default function Catelog(props: { scrollHeight: string | number; className?: string }) {
   const queryClient = useQueryClient()
   const trpc = useTRPC()
-  const edit = useAwesome(state => state.edit)
-  const expand = useAwesome(state => state.catelogExpand)
 
   const { data: catelogs } = useQuery({
     ...trpc.awesome.catelogs.tree.queryOptions(),
@@ -66,12 +63,10 @@ export default function Catelog(props: { scrollHeight: string | number; classNam
             strategy={verticalListSortingStrategy}
           >
             {catelogs.map(item => (
-              <DraggableCatelogItem key={item.id} catelog={item} edit={edit} expand={expand} />
+              <DraggableCatelogItem key={item.id} catelog={item} />
             ))}
           </SortableContext>
-          <DragOverlay>
-            {dragging ? <CatelogItem catelog={dragging} edit={edit} expand={expand} /> : null}
-          </DragOverlay>
+          <DragOverlay>{dragging ? <CatelogItem catelog={dragging} /> : null}</DragOverlay>
         </DndContext>
       </Stack>
     </ScrollArea>

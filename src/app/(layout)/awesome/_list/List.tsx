@@ -4,11 +4,10 @@ import { useEffect, useRef } from 'react'
 
 import { useTRPC } from '@/lib/trpc-client'
 
-import { awesomeScrollIntoViewEmitter, useAwesome } from '../state'
+import { awesomeScrollIntoViewEmitter } from '../AwesomeState'
 import ListItemGroup from './ListItemGroup'
 
 export default function List(props: { scrollHeight: string | number; className?: string }) {
-  const { edit } = useAwesome()
   const trpc = useTRPC()
 
   const { data: list } = useQuery({
@@ -32,7 +31,7 @@ export default function List(props: { scrollHeight: string | number; className?:
     <ScrollArea h={props.scrollHeight} viewportRef={viewportRef} offsetScrollbars="y">
       <Stack pos="relative" gap={0}>
         {list.map(item => (
-          <ListItemGroup key={item.id} catelog={item} edit={edit} />
+          <ListItemGroup key={item.id} catelog={item} />
         ))}
       </Stack>
     </ScrollArea>

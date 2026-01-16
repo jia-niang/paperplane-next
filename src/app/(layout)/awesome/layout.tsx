@@ -6,6 +6,8 @@ import { auth } from '@/lib/auth'
 import { getQueryClient } from '@/lib/query-client'
 import { trpcServer } from '@/lib/trpc-server'
 
+import AwesomeState from './AwesomeState'
+
 export default async function AwesomeLayout({ children }: LayoutProps<'/awesome'>) {
   const queryClient = getQueryClient()
 
@@ -18,5 +20,9 @@ export default async function AwesomeLayout({ children }: LayoutProps<'/awesome'
     queryClient.prefetchQuery(trpcServer.awesome.tags.list.queryOptions()),
   ])
 
-  return <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <AwesomeState>{children}</AwesomeState>
+    </HydrationBoundary>
+  )
 }

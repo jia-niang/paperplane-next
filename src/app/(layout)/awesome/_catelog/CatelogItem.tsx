@@ -23,21 +23,22 @@ import ConfirmButton from '@/components/buttons/ConfirmButton'
 import { DraggableWrapperProps } from '@/components/layouts/Draggable'
 import { useTRPC } from '@/lib/trpc-client'
 
-import { awesomeScrollIntoViewEmitter } from '../state'
+import { awesomeScrollIntoViewEmitter, useAwesome } from '../AwesomeState'
 import CatelogEditButton from './CatelogEditButton'
 
 export interface CatelogItemProps {
   catelog: AwesomeCatelogNode
   parent?: AwesomeCatelogNode
-  edit?: boolean
-  expand?: boolean
   className?: string
   style?: CSSProperties
 }
 
 export default function CatelogItem(props: CatelogItemProps & DraggableWrapperProps) {
-  const { catelog, parent, edit, expand, className, style, attributes, listeners, ref } = props
+  const { catelog, parent, className, style, attributes, listeners, ref } = props
   const { children } = catelog
+
+  const edit = useAwesome(s => s.edit)
+  const expand = useAwesome(s => s.catelogExpand)
 
   const mounted = useMounted()
 
@@ -109,7 +110,7 @@ export default function CatelogItem(props: CatelogItemProps & DraggableWrapperPr
       {...attributes}
     >
       <Group gap={4}>
-        {edit ? (
+        {edit === 'sort' ? (
           <IconGripVertical size="1em" className="raw cursor-move text-gray-400" {...listeners} />
         ) : parent ? (
           <IconPointFilled size="0.5em" className="raw ml-1 cursor-default text-gray-300" />
@@ -128,7 +129,7 @@ export default function CatelogItem(props: CatelogItemProps & DraggableWrapperPr
         </Text>
       </Group>
 
-      {edit ? (
+      {edit === 'edit' ? (
         <Group mt={4} gap={8} pl={24}>
           {!isChild ? (
             <CatelogEditButton size="compact-xs" parent={catelog} variant="light">
@@ -155,7 +156,7 @@ export default function CatelogItem(props: CatelogItemProps & DraggableWrapperPr
       ) : null}
 
       {children.length > 0 && isExpand ? (
-        <Stack mt={4} gap={2}>
+        <Stack mt={4} gap={2} ml={12}>
           <DndContext
             id={dndContextId}
             onDragStart={e => void setDragging(children.find(item => item.id === e.active.id)!)}
@@ -167,15 +168,14 @@ export default function CatelogItem(props: CatelogItemProps & DraggableWrapperPr
               strategy={verticalListSortingStrategy}
             >
               {catelog.children.map(item => (
-                <DraggableCatelogItem key={item.id} parent={catelog} catelog={item} edit={edit} />
+                <DraggableCatelogItem key={item.id} parent={catelog} catelog={item} />
               ))}
             </SortableContext>
+
             {mounted
               ? createPortal(
                   <DragOverlay>
-                    {dragging ? (
-                      <CatelogItem parent={catelog} catelog={dragging} edit={edit} />
-                    ) : null}
+                    {dragging ? <CatelogItem parent={catelog} catelog={dragging} /> : null}
                   </DragOverlay>,
                   document.body
                 )

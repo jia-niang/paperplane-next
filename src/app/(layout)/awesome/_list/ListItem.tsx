@@ -13,6 +13,7 @@ import { DraggableWrapperProps } from '@/components/layouts/Draggable'
 import { useTRPC } from '@/lib/trpc-client'
 import { AwesomeCatelog } from '@/prisma/client'
 
+import { useAwesome } from '../AwesomeState'
 import BadgeSites from './BadgeSites'
 import BadgeTags from './BadgeTags'
 import ListItemEditButton from './ListItemEditButton'
@@ -20,7 +21,6 @@ import ListItemEditButton from './ListItemEditButton'
 export interface ListItemsProps {
   awesome: AwesomeItemResult
   catelog: AwesomeCatelog
-  edit?: boolean
   className?: string
   style?: CSSProperties
 }
@@ -36,11 +36,13 @@ export function awesomeStarLevel(stars: number) {
 }
 
 export default function ListItem(props: ListItemsProps & DraggableWrapperProps) {
-  const { awesome, catelog, edit, className, style, attributes, listeners, ref } = props
+  const { awesome, catelog, className, style, attributes, listeners, ref } = props
   const displayUrl = awesome.homepage
     ?.replace(/^https?:\/\//, '')
     .replace(/^www\./, '')
     .replace(/\/$/, '')
+
+  const edit = useAwesome(s => s.edit)
 
   const trpc = useTRPC()
   const queryClient = useQueryClient()
@@ -70,7 +72,7 @@ export default function ListItem(props: ListItemsProps & DraggableWrapperProps) 
       ref={ref}
       {...attributes}
     >
-      {edit ? (
+      {edit === 'sort' ? (
         <IconGripVertical
           size="1em"
           className="raw shrink-0 cursor-move text-gray-500"
@@ -117,7 +119,7 @@ export default function ListItem(props: ListItemsProps & DraggableWrapperProps) 
       <Group ml="auto" className="shrink-0" gap={8} pl={24}>
         <BadgeTags className="shrink-0" awesome={awesome} />
 
-        {edit ? (
+        {edit === 'edit' ? (
           <>
             <ListItemEditButton
               catelog={catelog}

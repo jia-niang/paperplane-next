@@ -10,7 +10,6 @@ import { useId, useState } from 'react'
 import { useTRPC } from '@/lib/trpc-client'
 import { AwesomeTag } from '@/prisma/client'
 
-import { useAwesome } from '../state'
 import TagEditButton from './TagEditButton'
 import TagItem, { DraggableTagItem } from './TagItem'
 
@@ -23,7 +22,6 @@ export default function TagPanelButton(props: TagPanelButtonProps) {
 
   const queryClient = useQueryClient()
   const trpc = useTRPC()
-  const { edit } = useAwesome()
 
   const [opened, setOpened] = useState(false)
 
@@ -92,11 +90,11 @@ export default function TagPanelButton(props: TagPanelButtonProps) {
               strategy={verticalListSortingStrategy}
             >
               {tags.map(item => (
-                <DraggableTagItem className="my-2 basis-0" key={item.id} tag={item} edit={edit} />
+                <DraggableTagItem className="my-2 basis-0" key={item.id} tag={item} edit />
               ))}
             </SortableContext>
             <DragOverlay>
-              {dragging ? <TagItem className="my-2 basis-0" tag={dragging} edit={edit} /> : null}
+              {dragging ? <TagItem className="my-2 basis-0" tag={dragging} edit /> : null}
             </DragOverlay>
           </DndContext>
         </ScrollArea>

@@ -9,21 +9,22 @@ import { CSSProperties, useId, useMemo, useState } from 'react'
 import { AwesomeItemResult, AwesomeTreeResult } from '@/app/api/_awesome/items'
 import { useTRPC } from '@/lib/trpc-client'
 
-import { useAwesome } from '../state'
+import { useAwesome } from '../AwesomeState'
 import ListItem, { DraggableListItem } from './ListItem'
 import ListItemEditButton from './ListItemEditButton'
 
 export interface ListItemGroupProps {
   catelog: AwesomeTreeResult
-  edit?: boolean
   className?: string
   style?: CSSProperties
 }
 
 export default function ListItemGroup(props: ListItemGroupProps) {
-  const { catelog, edit, className, style } = props
+  const { catelog, className, style } = props
 
-  const { search } = useAwesome()
+  const edit = useAwesome(s => s.edit)
+  const search = useAwesome(s => s.search)
+
   const list = useMemo(
     () =>
       catelog.underAwesomes.filter(
@@ -101,7 +102,7 @@ export default function ListItemGroup(props: ListItemGroupProps) {
 
         <Divider className="grow" />
 
-        {edit ? (
+        {edit === 'edit' ? (
           <ListItemEditButton ml="auto" variant="light" size="compact-xs" catelog={catelog}>
             添加 Awesome
           </ListItemEditButton>
@@ -117,11 +118,11 @@ export default function ListItemGroup(props: ListItemGroupProps) {
         >
           <SortableContext items={list.map(item => item.id)} strategy={verticalListSortingStrategy}>
             {list.map(item => (
-              <DraggableListItem key={item.id} awesome={item} catelog={catelog} edit={edit} />
+              <DraggableListItem key={item.id} awesome={item} catelog={catelog} />
             ))}
           </SortableContext>
           <DragOverlay>
-            {dragging ? <ListItem awesome={dragging} catelog={catelog} edit={edit} /> : null}
+            {dragging ? <ListItem awesome={dragging} catelog={catelog} /> : null}
           </DragOverlay>
         </DndContext>
       </Stack>

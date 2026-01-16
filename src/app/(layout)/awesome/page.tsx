@@ -3,17 +3,17 @@
 import { Button, Grid, GridCol, Group, SegmentedControl, Stack, TextInput } from '@mantine/core'
 import { useDebouncedCallback } from '@mantine/hooks'
 import { IconListTree, IconMenu2, IconSearch } from '@tabler/icons-react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import GradientTitle from '@/components/labels/GradientTitle'
 import { useSession } from '@/lib/auth-client'
 
+import { useAwesome } from './AwesomeState'
 import Catelog from './_catelog/Catelog'
 import CatelogEditButton from './_catelog/CatelogEditButton'
 import List from './_list/List'
 import ListItemEditButton from './_list/ListItemEditButton'
 import TagPanelButton from './_tag/TagPanelButton'
-import { useAwesome } from './state'
 
 const headerTop = 130 + 16
 const headerHeight = 50
@@ -28,16 +28,19 @@ const foldTogglerData = [
 
 export default function AwesomePage() {
   const [searchText, setSearchText] = useState('')
-  const { edit, catelogExpand, setEdit, setSearch, setCatelogExpand } = useAwesome()
+  const edit = useAwesome(s => s.edit)
+  const catelogExpand = useAwesome(s => s.catelogExpand)
+
   const { user } = useSession()
 
-  const debouncedSetSearch = useDebouncedCallback(setSearch, 200)
+  const debouncedSetSearch = useDebouncedCallback(
+    search => void useAwesome.setState({ search }),
+    200
+  )
   const searchTextChangeHandler = (input: string) => {
     setSearchText(input)
     debouncedSetSearch(input)
   }
-
-  useEffect(() => void useAwesome.getState().reset(), [user])
 
   return (
     <Stack pos="relative">
@@ -45,14 +48,14 @@ export default function AwesomePage() {
         <GridCol span={2}>
           <Group>
             <GradientTitle>类别：</GradientTitle>
-            {edit ? (
+            {edit === 'edit' ? (
               <CatelogEditButton size="compact" variant="light" className="ml-auto">
                 添加类别
               </CatelogEditButton>
             ) : (
               <SegmentedControl
                 value={catelogExpand ? 'expand' : 'fold'}
-                onChange={value => void setCatelogExpand(value === 'expand')}
+                onChange={value => void useAwesome.setState({ catelogExpand: value === 'expand' })}
                 data={foldTogglerData}
                 size="xs"
                 className="ml-auto"
@@ -70,7 +73,7 @@ export default function AwesomePage() {
               className="grow"
               value={searchText}
               onChange={e => void searchTextChangeHandler(e.target.value)}
-              disabled={edit}
+              disabled={!!edit}
             />
 
             {user ? (
@@ -79,18 +82,35 @@ export default function AwesomePage() {
                   添加 Awesome
                 </ListItemEditButton>
 
-                {edit ? (
-                  <TagPanelButton size="compact" variant="light">
-                    管理标签
-                  </TagPanelButton>
-                ) : null}
+                <TagPanelButton size="compact" variant="light">
+                  管理标签
+                </TagPanelButton>
 
-                {edit ? (
+                {edit === 'sort' ? (
                   <Button
                     size="compact"
                     variant="light"
                     color="yellow"
-                    onClick={() => void setEdit(false)}
+                    onClick={() => void useAwesome.setState({ edit: null })}
+                  >
+                    退出排序模式
+                  </Button>
+                ) : (
+                  <Button
+                    size="compact"
+                    variant="light"
+                    onClick={() => void useAwesome.setState({ search: '', edit: 'sort' })}
+                  >
+                    排序模式
+                  </Button>
+                )}
+
+                {edit === 'edit' ? (
+                  <Button
+                    size="compact"
+                    variant="light"
+                    color="yellow"
+                    onClick={() => void useAwesome.setState({ edit: null })}
                   >
                     退出编辑模式
                   </Button>
@@ -98,10 +118,7 @@ export default function AwesomePage() {
                   <Button
                     size="compact"
                     variant="light"
-                    onClick={() => {
-                      setSearch('')
-                      setEdit(true)
-                    }}
+                    onClick={() => void useAwesome.setState({ search: '', edit: 'edit' })}
                   >
                     编辑模式
                   </Button>
