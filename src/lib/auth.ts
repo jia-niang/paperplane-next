@@ -9,7 +9,6 @@ import { prisma } from '@/lib/prisma'
 import { redis } from '@/lib/redis'
 
 export const auth = betterAuth({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   basePath: '/api/auth',
   database: prismaAdapter(prisma, { provider: 'postgresql' }),
   secondaryStorage: process.env.CI
