@@ -60,7 +60,7 @@ export default function OpenAPIDocs(props: OpenAPIDocsProps) {
 
           <TabsPanel value="meta" py={12}>
             <KVTable>
-              <KVTableRow label="接口 URL" classNames={{ label: 'align-top' }}>
+              <KVTableRow label="接口 URL" classNames={{ label: 'align-top', field: 'break-all' }}>
                 <Text ff="monospace" inherit>
                   {process.env.NEXT_PUBLIC_BASE_URL + endpoint}
                 </Text>

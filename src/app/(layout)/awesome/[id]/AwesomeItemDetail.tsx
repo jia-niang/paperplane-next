@@ -18,13 +18,13 @@ export default function AwesomeItemDetail(props: AwesomeItemDetailProps) {
   return (
     <Stack {...restProps} className={clsx('', className)}>
       <KVTable>
-        <KVTableRow label="官网" classNames={{ label: 'align-top', field: 'break-words' }}>
+        <KVTableRow label="官网" classNames={{ label: 'align-top', field: 'break-all' }}>
           <Link className="underline" href={awesome.homepage} target="_blank">
             {awesome.homepage}
           </Link>
         </KVTableRow>
 
-        <KVTableRow label="源代码" classNames={{ label: 'align-top', field: 'break-words' }}>
+        <KVTableRow label="源代码" classNames={{ label: 'align-top', field: 'break-all' }}>
           {awesome.source ? (
             <Link href={awesome.source} target="_blank">
               {awesome.source}
@@ -34,7 +34,7 @@ export default function AwesomeItemDetail(props: AwesomeItemDetailProps) {
           )}
         </KVTableRow>
 
-        <KVTableRow label="包" classNames={{ label: 'align-top', field: 'break-words' }}>
+        <KVTableRow label="包" classNames={{ label: 'align-top', field: 'break-all' }}>
           {awesome.registry ? (
             <Link href={awesome.registry} target="_blank">
               {awesome.registry}
@@ -59,7 +59,7 @@ export default function AwesomeItemDetail(props: AwesomeItemDetailProps) {
 
         <KVTableRow
           label="介绍"
-          classNames={{ label: 'align-top', field: 'break-words whitespace-pre-wrap' }}
+          classNames={{ label: 'align-top', field: 'break-all whitespace-pre-wrap' }}
         >
           {awesome.desc || '-'}
         </KVTableRow>
