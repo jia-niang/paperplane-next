@@ -51,8 +51,8 @@ export const BlurPopupCard = forwardRef<any, BlurPopupCardProps>(
           right={0 - px - popupPx + right}
           pos="absolute"
           className={twMerge(
-            popupClassName,
-            'blur-popup-card__popup z-10 rounded-md bg-white/60 shadow-[0_0_5px_0_rgba(0,0,0,0.45)] backdrop-blur-lg'
+            'blur-popup-card__popup z-10 rounded-md bg-white/60 shadow-[0_0_5px_0_rgba(0,0,0,0.45)] backdrop-blur-lg',
+            popupClassName
           )}
         >
           {children}
