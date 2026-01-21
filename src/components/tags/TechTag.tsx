@@ -1,7 +1,7 @@
 import { Group, Image, Text } from '@mantine/core'
-import clsx from 'clsx'
 import NextImage from 'next/image'
 import { ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 interface BaseTechTagProps {
   title: ReactNode
@@ -15,7 +15,7 @@ function BaseTechTag(props: BaseTechTagProps) {
 
   const tag = (
     <Group
-      className={clsx(
+      className={twMerge(
         className,
         'rounded-sm border-1 border-solid border-gray-400 pb-2 text-[14px] shadow hover:bg-gray-100'
       )}

@@ -1,10 +1,10 @@
 'use client'
 
 import { Flex, Group, Stack, Text } from '@mantine/core'
-import clsx from 'clsx'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ReactNode } from 'react'
+import { twJoin } from 'tailwind-merge'
 
 import { BlurPopupCard } from '@/components/cards/BlurPopupCard'
 import GradientTitle from '@/components/labels/GradientTitle'
@@ -56,8 +56,8 @@ export default function OpenItem(props: OpenItemProps) {
 
   return (
     <BlurPopupCard
-      className={clsx('rounded-md', current ? `from-lb-100 bg-gradient-to-r to-transparent` : '')}
-      popupClassName={clsx(
+      className={twJoin('rounded-md', current ? `from-lb-100 bg-gradient-to-r to-transparent` : '')}
+      popupClassName={twJoin(
         current ? `from-lb-200 bg-gradient-to-br via-transparent to-transparent` : ''
       )}
       px={8}

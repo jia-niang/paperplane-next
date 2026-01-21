@@ -2,8 +2,8 @@
 
 import { Button, Stack, Tabs, TabsList, TabsPanel, TabsTab, Text } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
-import clsx from 'clsx'
 import { CSSProperties, FC, ReactNode, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { useSession } from '@/lib/auth-client'
 import { useTRPC } from '@/lib/trpc-client'
@@ -45,7 +45,7 @@ export default function OpenAPIDocs(props: OpenAPIDocsProps) {
   const [showApiKey, setShowApiKey] = useState(false)
 
   return (
-    <Stack className={clsx(className)} style={style}>
+    <Stack className={twMerge(className)} style={style}>
       {title ? <GradientTitle>{title}</GradientTitle> : null}
 
       {desc ? <Text className="text-[18px] whitespace-pre-wrap text-[#333]">{desc}</Text> : null}
@@ -60,7 +60,7 @@ export default function OpenAPIDocs(props: OpenAPIDocsProps) {
 
           <TabsPanel value="meta" py={12}>
             <KVTable>
-              <KVTableRow label="接口 URL" classNames={{ label: 'align-top', field: 'break-all' }}>
+              <KVTableRow label="接口 URL" classNames={{ field: 'break-all' }}>
                 <Text ff="monospace" inherit>
                   {process.env.NEXT_PUBLIC_BASE_URL + endpoint}
                 </Text>

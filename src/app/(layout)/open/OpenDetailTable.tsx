@@ -43,14 +43,18 @@ export function OpenDetailTable(props: OpenDetailTableProps) {
         )}
       </KVTableRow>
 
-      <KVTableRow label="源码" icon={<IconFileDescription />}>
+      <KVTableRow
+        label="源码"
+        icon={<IconFileDescription />}
+        classNames={{ field: 'align-middle' }}
+      >
         <Group gap={16}>
           <GitHubLink repo={repo} />
           <GiteaLink repo={giteaRepo} />
         </Group>
       </KVTableRow>
 
-      <KVTableRow label="版本" icon={<IconVersions />}>
+      <KVTableRow label="版本" icon={<IconVersions />} classNames={{ field: 'align-middle' }}>
         <Group gap={12}>
           {type === 'docker' ? (
             <a href={`https://hub.docker.com/r/${nameInLink}`} target="_blank">
@@ -81,12 +85,8 @@ export function OpenDetailTable(props: OpenDetailTableProps) {
       </KVTableRow>
 
       {tech ? (
-        <KVTableRow
-          label="技术栈"
-          icon={<IconCpu />}
-          classNames={{ label: 'align-top', field: 'align-top' }}
-        >
-          <Group gap={12} mt={-2}>
+        <KVTableRow label="技术栈" icon={<IconCpu />}>
+          <Group gap={12}>
             {(Array.isArray(tech) ? tech : [tech]).map(Item => (
               <Item key={Item.name} />
             ))}

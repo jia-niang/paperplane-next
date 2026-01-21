@@ -3,8 +3,8 @@ import { restrictToParentElement } from '@dnd-kit/modifiers'
 import { arrayMove, SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import { Divider, Group, Stack, Text } from '@mantine/core'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import clsx from 'clsx'
 import { CSSProperties, useId, useMemo, useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { AwesomeItemResult, AwesomeTreeResult } from '@/app/api/_awesome/items'
 import { useTRPC } from '@/lib/trpc-client'
@@ -70,12 +70,12 @@ export default function ListItemGroup(props: ListItemGroupProps) {
   }
 
   if (!edit && list.length <= 0) {
-    return <div className={clsx(`awesome__catelog-group__id-${catelog.id}`, className)}></div>
+    return <div className={twMerge(`awesome__catelog-group__id-${catelog.id}`, className)}></div>
   }
 
   return (
     <Stack
-      className={clsx(`awesome__catelog-group__id-${catelog.id}`, className)}
+      className={twMerge(`awesome__catelog-group__id-${catelog.id}`, className)}
       pos="relative"
       style={style}
       pr={24}

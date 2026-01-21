@@ -8,9 +8,9 @@ import {
   IconServer,
   IconStack2Filled,
 } from '@tabler/icons-react'
-import clsx from 'clsx'
 import Link from 'next/link'
 import { FC, useMemo } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import GradientTitle from '@/components/labels/GradientTitle'
 import { KVTable, KVTableRow } from '@/components/tables/KVTable'
@@ -54,7 +54,7 @@ export default function DemosItem(props: DemosItemProps) {
             </Link>
           </KVTableRow>
 
-          <KVTableRow classNames={{ label: 'align-top', field: 'align-top' }} label="技术栈">
+          <KVTableRow label="技术栈">
             <Group gap={12}>
               {tagList.map(Item => (
                 <Item key={Item.name} />
@@ -109,7 +109,7 @@ function DemosTag(props: { label: string; icon: FC<IconProps>; className?: strin
   const { label, icon: Icon, className } = props
   return (
     <Text
-      className={clsx('flex pb-1 align-middle', className)}
+      className={twMerge('flex pb-1 align-middle', className)}
       component="span"
       size="sm"
       c="gray.6"

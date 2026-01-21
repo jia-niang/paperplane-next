@@ -1,8 +1,8 @@
 import { Group, Image, Text, Tooltip } from '@mantine/core'
 import { IconCode, IconPackage } from '@tabler/icons-react'
-import clsx from 'clsx'
 import NextImage from 'next/image'
 import { ReactNode, useMemo } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { AwesomeItemResult } from '@/app/api/_awesome/items'
 
@@ -92,7 +92,7 @@ export default function BadgeSites(props: BadgeProps) {
         <Text c="gray.5" className="shrink-0 cursor-default text-[20px] leading-[1.3] select-none">
           ·
         </Text>
-        <Group className={clsx('shrink-0', className)} gap={8}>
+        <Group className={twMerge('shrink-0', className)} gap={8}>
           {result}
         </Group>
       </>

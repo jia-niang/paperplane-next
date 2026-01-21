@@ -14,9 +14,9 @@ import { useMounted } from '@mantine/hooks'
 import { notifications } from '@mantine/notifications'
 import { IconGripVertical, IconPointFilled, IconSquareRotatedFilled } from '@tabler/icons-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import clsx from 'clsx'
 import { CSSProperties, useId, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { twMerge } from 'tailwind-merge'
 
 import { AwesomeCatelogNode } from '@/app/api/_awesome/catelogs'
 import ConfirmButton from '@/components/buttons/ConfirmButton'
@@ -101,7 +101,7 @@ export default function CatelogItem(props: CatelogItemProps & DraggableWrapperPr
 
   return (
     <Stack
-      className={clsx('rounded-md bg-white/60 backdrop-blur-lg', className)}
+      className={twMerge('rounded-md bg-white/60 backdrop-blur-lg', className)}
       px={2}
       py={4}
       gap={0}

@@ -3,8 +3,8 @@ import { CSS } from '@dnd-kit/utilities'
 import { Group, luminance, Text, Tooltip } from '@mantine/core'
 import { IconGripVertical } from '@tabler/icons-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import clsx from 'clsx'
 import { CSSProperties } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import ConfirmButton from '@/components/buttons/ConfirmButton'
 import { DraggableWrapperProps } from '@/components/layouts/Draggable'
@@ -44,7 +44,7 @@ export default function TagItem(props: TagItemProps & DraggableWrapperProps) {
 
   return (
     <Group
-      className={clsx(
+      className={twMerge(
         'relative flex cursor-pointer flex-nowrap items-center rounded-md px-2 py-1 select-none',
         className
       )}

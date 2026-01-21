@@ -53,7 +53,7 @@ export default function AItem(props: AItemProps) {
 
         {tech ? (
           <KVTableRow label="技术栈" icon={<IconCpu />}>
-            <Group gap={12} mt={-2}>
+            <Group gap={12}>
               {(Array.isArray(tech) ? tech : [tech]).map(Item => (
                 <Item key={Item.name} />
               ))}

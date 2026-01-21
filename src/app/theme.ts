@@ -1,5 +1,5 @@
 import { Container, createTheme } from '@mantine/core'
-import clsx from 'clsx'
+import { twJoin } from 'tailwind-merge'
 
 export default createTheme({
   primaryColor: 'lb',
@@ -68,7 +68,7 @@ export default createTheme({
     },
     Container: Container.extend({
       classNames: (_, { size }) => ({
-        root: clsx({ 'container--responsive': size === 'responsive' }),
+        root: twJoin(size === 'responsive' ? 'container--responsive' : ''),
       }),
     }),
   },

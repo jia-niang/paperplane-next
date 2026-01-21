@@ -3,9 +3,9 @@ import { CSS } from '@dnd-kit/utilities'
 import { Group, Text, Tooltip } from '@mantine/core'
 import { IconGripVertical, IconMichelinStar, IconPointFilled } from '@tabler/icons-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import clsx from 'clsx'
 import Link from 'next/link'
 import { CSSProperties } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { AwesomeItemResult } from '@/app/api/_awesome/items'
 import ConfirmButton from '@/components/buttons/ConfirmButton'
@@ -61,7 +61,7 @@ export default function ListItem(props: ListItemsProps & DraggableWrapperProps) 
 
   return (
     <Group
-      className={clsx(
+      className={twMerge(
         'flex-nowrap rounded-md bg-white/60 backdrop-blur-lg hover:bg-gray-100',
         className
       )}

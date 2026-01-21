@@ -1,8 +1,8 @@
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core'
 import '@mantine/dates/styles.css'
-import clsx from 'clsx'
 import type { Metadata } from 'next'
 import { ReactNode } from 'react'
+import { twJoin } from 'tailwind-merge'
 import * as z from 'zod'
 import { zhCN } from 'zod/locales'
 
@@ -25,7 +25,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html
       lang="zh-CN"
       {...mantineHtmlProps}
-      className={clsx(
+      className={twJoin(
         fontFZYanSong.variable,
         fontIosevka.variable,
         fontSwift.variable,

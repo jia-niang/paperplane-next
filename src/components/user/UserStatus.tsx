@@ -12,9 +12,9 @@ import {
   Stack,
   Text,
 } from '@mantine/core'
-import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 import { authClient, useSession } from '@/lib/auth-client'
 
@@ -36,7 +36,11 @@ function UserStatus(props: { className?: string }) {
   return (
     <HoverCard>
       <HoverCardTarget>
-        <Flex className={clsx('cursor-pointer self-start', props.className)} align="center" gap={8}>
+        <Flex
+          className={twMerge('cursor-pointer self-start', props.className)}
+          align="center"
+          gap={8}
+        >
           {!isPending ? (
             <>
               <Text size="sm" ff="sans-serif">
