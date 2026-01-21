@@ -50,7 +50,7 @@ export function KVTableRow(props: KVTableRowProps) {
       </TableTd>
 
       <TableTd
-        className={twMerge('align-top font-sans leading-[1.2] text-gray-600', classNames?.field)}
+        className={twMerge('align-top font-sans leading-[1.6] text-gray-600', classNames?.field)}
       >
         {children}
       </TableTd>
