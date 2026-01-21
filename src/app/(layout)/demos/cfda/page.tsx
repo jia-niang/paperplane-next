@@ -3,7 +3,7 @@ import { Divider, Stack } from '@mantine/core'
 import GradientTitle from '@/components/labels/GradientTitle'
 import { ElementTag, MongoDBTag, RestifyTag, VueTag } from '@/components/tags/TechTag'
 
-import { DemosDetailTable } from '../details'
+import { DemosDetailTable } from '../DemosDetailTable'
 import Desc from './Desc.mdx'
 
 export default function CFDAPage() {

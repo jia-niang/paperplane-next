@@ -10,7 +10,7 @@ import {
   TDesignTag,
 } from '@/components/tags/TechTag'
 
-import { DemosDetailTable } from '../details'
+import { DemosDetailTable } from '../DemosDetailTable'
 import Desc from './Desc.mdx'
 
 export default function CITechSharePage() {
