@@ -59,7 +59,7 @@ function ItemCatelog(props: { catelog: SnippetCatelog }) {
     <nav>
       <Link
         className={twMerge(
-          'inline-flex cursor-pointer rounded-md px-2 py-1 text-[16px] leading-[1.4] text-[#555] hover:underline',
+          'inline-flex cursor-pointer rounded-md px-2 py-[2px] text-[16px] leading-[1.4] text-[#555] hover:underline',
           current ? 'from-lb-100 to-lb-50 bg-gradient-to-r' : ''
         )}
         href={`/snippet${href}`}

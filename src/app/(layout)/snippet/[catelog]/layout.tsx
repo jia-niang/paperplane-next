@@ -34,7 +34,7 @@ export default async function SnippetCatelogLayout(props: {
   const { name, icon = defaultIcon, article: articleList } = catelog
 
   return (
-    <Stack h={listHeight} gap={8}>
+    <Stack h={listHeight} gap={16}>
       <Stack gap={8}>
         <Group gap={8} align="center">
           <Image fit="contain" h={32} w={32} component={NextImage} src={icon} alt="icon" />
@@ -52,7 +52,7 @@ export default async function SnippetCatelogLayout(props: {
         </Group>
       </Stack>
 
-      <ScrollArea scrollbars="y" className="pr-4">
+      <ScrollArea scrollbars="y" className="pr-6">
         {props.children}
       </ScrollArea>
     </Stack>
