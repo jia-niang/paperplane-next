@@ -108,11 +108,6 @@ steps:
       source: ./.next/static/**/*
       target: /paperplane-next/_next/static
       strip_prefix: .next/static
-      content_type:
-        ".*ttf$": "font/ttf"
-        ".*woff$": "font/woff"
-        ".*woff2$": "font/woff2"
-        ".*eot$": "application/vnd.ms-fontobject"
 
   - name: clean
     image: docker:dind
