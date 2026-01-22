@@ -20,7 +20,7 @@ const listHeight = `calc(100vh - ${listTop + 32}px)`
 export default function SnippetCatelogList() {
   return (
     <ScrollArea pos="sticky" top={headerTop} left={0} h={listHeight} scrollbars="y" type="never">
-      <Stack gap={24} component="aside">
+      <Stack gap={16} component="aside">
         {groups.map(item => (
           <ItemCatelogGroup group={item} key={item.key} />
         ))}
@@ -59,7 +59,7 @@ function ItemCatelog(props: { catelog: SnippetCatelog }) {
     <nav>
       <Link
         className={twMerge(
-          'inline-flex cursor-pointer rounded-md px-2 py-[2px] text-[16px] leading-[1.4] text-[#555] hover:underline',
+          'inline-flex cursor-pointer rounded-md px-2 py-[2px] text-[16px] leading-[1.4] text-[#333] hover:underline',
           current ? 'from-lb-100 to-lb-50 bg-gradient-to-r' : ''
         )}
         href={`/snippet${href}`}
