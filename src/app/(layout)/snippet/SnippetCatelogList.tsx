@@ -1,7 +1,7 @@
 'use client'
 
-import { Stack, Text, Image, Group, ScrollArea, SimpleGrid } from '@mantine/core'
-import { IconCaretDownFilled } from '@tabler/icons-react'
+import { Stack, Text, Image, Group, ScrollArea, SimpleGrid, Divider } from '@mantine/core'
+import { IconPointFilled } from '@tabler/icons-react'
 import NextImage from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -33,11 +33,12 @@ function ItemCatelogGroup(props: { group: SnippetCatelogGroup }) {
   const { title, children } = props.group
 
   return (
-    <Stack component="section" gap={8}>
-      <Text className="cursor-default" c="#aaa" size="16px">
-        <IconCaretDownFilled className="mr-1" stroke={1} />
-        {title}
-      </Text>
+    <Stack component="section" gap={4}>
+      <Group gap={4} className="cursor-default text-[16px] text-[#aaa]">
+        <IconPointFilled className="raw" size="0.75em" />
+        <Text inherit>{title}</Text>
+        <Divider className="mx-2 grow" />
+      </Group>
 
       <SimpleGrid spacing={4} verticalSpacing={0} cols={2}>
         {children.map(item => (

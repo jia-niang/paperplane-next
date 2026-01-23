@@ -1,19 +1,14 @@
 import { SnippetCatelog } from '../../list'
-import intro from './intro.mdx'
-import monorepo from './monorepo.mdx'
-import react from './react.mdx'
-import typescript from './typescript.mdx'
-import v8 from './v8.mdx'
 
 export const eslint: SnippetCatelog = {
   name: 'ESLint',
   key: 'eslint',
   icon: require('@/assets/snippet-icons/eslint.svg').default,
   article: [
-    { key: 'intro', title: '配置说明', component: intro },
-    { key: 'react', title: 'React + TS', component: react },
-    { key: 'typescript', title: 'TypeScript', component: typescript },
-    { key: 'monorepo', title: 'Monorepo 示例', component: monorepo },
-    { key: 'v8', title: '旧版 v8', component: v8 },
+    { key: 'intro', title: '配置说明', component: require('./intro.mdx').default },
+    { key: 'react', title: 'React + TS', component: require('./react.mdx').default },
+    { key: 'typescript', title: 'TypeScript', component: require('./typescript.mdx').default },
+    { key: 'monorepo', title: 'Monorepo 示例', component: require('./monorepo.mdx').default },
+    { key: 'v8', title: '旧版 v8', component: require('./v8.mdx').default },
   ],
 }

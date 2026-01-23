@@ -15,48 +15,4 @@ npm config get cache
 npm install -g npm@latest
 ```
 
-# 配置 Yarn
-
-```bash
-# 安装 yarn
-npm i -g yarn
-
-# 换淘宝源
-yarn config set registry https://registry.npmmirror.com
-# 换回官方源（https://registry.yarnpkg.com）
-yarn config delete registry
-# 查看当前源
-yarn config get registry
-
-# 查看缓存目录
-yarn cache dir
-```
-
-注意，`yarn` 从 2.0 开始有很大的改变：
-
-- 不再提供 `yarn global` 相关的指令，也就是说全局包需要使用 `npm i -g` 来安装；
-- 不再提供 `yarn create` 之类的指令，需要使用 `yarn dlx`。
-
-# 配置 pnpm
-
-```bash
-# 安装 pnpm
-npm i -g pnpm
-
-# 换淘宝源
-pnpm config set registry https://registry.npmmirror.com
-# 换回官方源（https://registry.npmjs.org）
-pnpm config delete registry
-# 查看当前源
-pnpm config get registry
-
-# 查看缓存目录
-pnpm store path
-```
-
-pnpm 的使用技巧：
-
-```bash
-# 处理幽灵依赖
-pnpm why package-name
-```
+更多配置，可以参考 [npm 备忘清单](https://code.paperplane.cc/docs/npm.html)（自部署）。

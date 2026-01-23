@@ -1,9 +1,11 @@
 import { SnippetCatelog } from '../../list'
-import settings from './settings.mdx'
 
 export const vscode: SnippetCatelog = {
   name: 'VSCode',
   key: 'vscode',
   icon: require('@/assets/snippet-icons/vscode.svg').default,
-  article: [{ key: 'settings', title: '用户设置 settings.json', component: settings }],
+  article: [
+    { key: 'global', title: '全局设置', component: require('./global.mdx').default },
+    { key: 'project', title: '项目设置', component: require('./project.mdx').default },
+  ],
 }

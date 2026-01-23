@@ -1,5 +1,7 @@
 # 开启 Sass 支持
 
+因为 CRA 原生支持 Sass，因此 `craco` 配置它也非常简单。
+
 依赖项：
 
 ```bash
@@ -9,83 +11,60 @@ npm add -D sass sass-loader
 配置如下：
 
 ```js
-const { override, addWebpackModuleRule } = require('customize-cra')
-
+/** @type {import('@craco/types').CracoConfig} */
 module.exports = {
-  webpack: override(
-    addWebpackModuleRule({
-      test: /\.s[ac]ss$/i,
-      use: [
-        'style-loader',
-        'css-loader',
-        {
-          loader: 'sass-loader',
-          options: {
-            // 如果需要主题、全局变量文件，请取消下面一行注释
-            // additionalData: '@import "~@/styles/global.scss";',
-          },
-        },
-      ],
-    })
-  ),
+  style: {
+    sass: {
+      // 以下是 sass-loader 配置项 https://webpack.js.org/loaders/sass-loader/
+      loaderOptions: {
+        // 如果需要全局 sass 变量文件，取消下面一行的注释
+        // additionalData: '@use "@/styles/global.scss" as *;',
+        sourceMap: true,
+      },
+    },
+  },
 }
 ```
 
+如果遇到 Sass 的警告，以下两个解决方式二选一：
+
+- 通过 `package.json` 中的 `resolutions` 和 `overrides` 把 `sass-loader` 锁定到高版本；
+- 添加字段 `sass.loaderOptions.sassOptions.silenceDeprecations`，值为 `['legacy-js-api']`，以此来关闭警告。
+
 # 开启 Less 支持
+
+这里需要用到 [`craco-less`](https://github.com/DocSpring/craco-less) 插件。
 
 依赖项：
 
 ```bash
-npm add -D less less-loader
+npm add -D less less-loader craco-less
 ```
 
 配置如下：
 
 ```js
-const { override, addWebpackModuleRule } = require('customize-cra')
+const CracoLessPlugin = require('craco-less')
 
+/** @type {import('@craco/types').CracoConfig} */
 module.exports = {
-  webpack: override(
-    addWebpackModuleRule({
-      test: /\.less$/i,
-      use: [
-        'style-loader',
-        'less-loader',
-        {
-          loader: 'less-loader',
-          options: {
-            // 如果需要主题、全局变量文件，请取消下面一行注释
-            // additionalData: '@import "~@/styles/global.less";',
-            lessOptions: {
-              javascriptEnabled: true,
-              noIeCompat: true,
-              globalVars: {},
-              modifyVars: {},
-            },
+  plugins: [
+    {
+      plugin: CracoLessPlugin,
+      options: {
+        lessLoaderOptions: {
+          // 以下是 less-loader 配置项 https://webpack.js.org/loaders/less-loader/
+          lessOptions: {
+            modifyVars: {},
+            javascriptEnabled: true,
+            noIeCompat: true,
           },
+          // 如果需要全局 less 变量文件，取消下面一行的注释
+          // additionalData: '@use "@/styles/global.scss" as *;',
+          additionalData: '@import "~@/styles/global.less";',
         },
-      ],
-    })
-  ),
+      },
+    },
+  ],
 }
 ```
-
-> 如果是**早期**的 `less-loader` 版本，还可以使用 `addLessLoader()` 这个 API 来快速配置 less：
->
-> ```js
-> const { override, addLessLoader } = require('customize-cra')
->
-> module.exports = {
->   webpack: override(
->     addLessLoader({
->       additionalData: '@import "~@/styles/global.less";',
->       lessOptions: {
->         globalVars: {},
->         modifyVars: {},
->       },
->     })
->   ),
-> }
-> ```
->
-> **注意，这个 API 内部做了一些配置，和近期版本的 less-loader 不兼容，新版本已经无法使用了，因此不推荐这个 API。**

@@ -5,97 +5,35 @@ Create-React-App 已经退出历史舞台，它本身设计的不易于配置，
 
 CRA 项目自带了一套 Webpack 和 Babel 配置，启动指令会使用 `react-scripts`，自带的配置就集成在这个包里面，所以必须使用例如 `react-app-rewired` 或 `craco` 这类工具来替换掉启动指令里面的 `react-scripts`，并提供一份它们约定的配置文件，这样能对 Webpack 和 Babel 进行定制。
 
-使用 `react-app-rewired` 时，还可以配合 `customize-cra` 一同使用，极大程度减少配置代码量。<br />
-**但是需要注意的是，这两个包已经很久没有维护了，更新的工具是 `craco`。**
+本文使用 `@craco/craco` 进行配置。
 
-# 使用 `react-app-rewired` 重写 CRA 的配置
+# 使用 `@craco/craco` 重写 CRA 的配置
 
-首先，安装 `react-app-rewired`：
+首先，安装 `@craco/craco`：
 
 ```bash
-npm add -D react-app-rewired
+npm add -D @craco/craco @craco/types
 ```
 
-然后，把 package.json 中 `scripts` 字段里面的 `react-scripts` 替换成 `react-app-rewired`；<br />
-然后在项目根目录新建一个 `config-overrides.js`，这个文件的导出对象会用于对 Webpack 和 Babel 的定制。
+然后，把 package.json 中 `scripts` 字段里面的 `react-scripts` 替换成 `craco`；<br />
+然后在项目根目录新建一个 `craco.config.js`，这个文件的导出对象会用于对 Webpack 和 Babel 的定制。
 
 空模板如下：
 
 ```js
-module.exports = {
-  webpack: function (config, env) {
-    return config
-  },
-  devServer: function (configFunction) {
-    return function (proxy, allowedHost) {
-      const config = configFunction(proxy, allowedHost)
-      return config
-    }
-  },
-  paths: function (paths, env) {
-    return paths
-  },
-  jest: function (config) {
-    return config
-  },
-}
-```
-
-# 使用 `customize-cra` 配合 `react-app-rewired`
-
-更推荐的方式是，配合 `customize-cra` 使用，它提供了一系列 API，可以更加方便的对各个配置进行定制。<br />
-可以查阅 [官方文档](https://github.com/arackaf/customize-cra/blob/master/api.md) 来了解。
-
-这里给出一个结合了 `customize-cra` 的 `config-overrides.js` 模板：
-
-```js
-const { override, overrideDevServer } = require('customize-cra')
-
-// 完整配置
-module.exports = {
-  webpack: override(),
-  devServer: overrideDevServer(config => {
-    return config
-  }),
-}
-
-// 如果只需要配置 webpack，可以简化为：
-module.exports = override()
-```
-
-可以理解为，这个 `override()` 方法用于整合用户定制的配置。<br />
-实际上，`customize-cra` 提供了大量的 API 用来修改 Webpack、Babel 等配置，其他章节会提供示例。
-
-# 理解这些工具做了什么
-
-这里提一句，`customize-cra` 提供的 API，格式类似于：
-
-```js
-pluginConfig => ((config: WebpackConfig) => WebpackConfig)
-```
-
-这里的 `pluginConfig` 是提供给 API 的配置，返回了一个类似于 “管道” 或者 “tap 操作” 的函数；<br />
-外层的 `override()` 函数依次把 Webpack 配置应用这些函数进行 “加工”，并使用最终的结果。
-
-我们也可以自行编写 `customize-cra` 的插件，代码类似于：
-
-```js
-function myPlugin(pluginConfig) {
-  return config => {
-    // 这个 config 参数就是 webpack 的配置
-    // 可以自行对它进行一些定制操作
-
+/** @type {import('@craco/types').CracoConfig} */
+module.exports = () => {
+  return {
+    plugins: [],
+    webpack: {},
+    babel: {},
+    style: {},
+    devServer: {},
     // ...
-    return config
-  },
-}
-
-module.exports = {
-  webpack: override(
-    myPlugin,
-    // ... 其他插件
-  ),
+  }
 }
 ```
 
-这里面函数返回一个对 Webpack 配置进行定制的函数即可。
+这里导出一个对象或返回对象的函数，这个对象里的各种配置将作为项目的 Webpack 或 Babel 等配置。
+
+具体用法，建议参考 [craco 官方文档](https://craco.js.org/)。

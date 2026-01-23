@@ -1,16 +1,17 @@
 # 添加 Webpack 路径别名
 
-可以使用 `addWebpackAlias()` 来快速添加 webpack 的别名：
+配置如下：
 
 ```js
-const { override, addWebpackAlias } = require('customize-cra')
+const path = require('path')
 
+/** @type {import('@craco/types').CracoConfig} */
 module.exports = {
-  webpack: override(
-    addWebpackAlias({
-      '@': 'src/',
-    })
-  ),
+  webpack: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
 }
 ```
 
@@ -19,14 +20,13 @@ module.exports = {
 配置如下：
 
 ```js
-const { override, addWebpackExternals } = require('customize-cra')
-
+/** @type {import('@craco/types').CracoConfig} */
 module.exports = {
-  webpack: override(
-    addWebpackExternals({
+  webpack: {
+    externals: {
       jQuery: '$',
-    })
-  ),
+    },
+  },
 }
 ```
 
@@ -35,23 +35,19 @@ module.exports = {
 配置如下：
 
 ```js
-const { override, overrideDevServer } = require('customize-cra')
-
+/** @type {import('@craco/types').CracoConfig} */
 module.exports = {
-  webpack: override(/* 其他配置 */),
-
-  devServer: overrideDevServer(devServerConfig => ({
-    ...devServerConfig,
+  devServer: {
     proxy: {
       '/api': {
-        target: 'https://localhost:1234',
+        target: 'http://localhost:1234',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',
         },
       },
     },
-  })),
+  },
 }
 ```
 
@@ -60,37 +56,16 @@ module.exports = {
 配置如下：
 
 ```js
-const { override, addWebpackPlugin } = require('customize-cra')
-
+/** @type {import('@craco/types').CracoConfig} */
 module.exports = {
-  webpack: override(
-    addWebpackPlugin(/* 插件 new 在这里 */),
-    addWebpackPlugin(/* 插件 new 在这里 */),
-    addWebpackPlugin(/* 插件 new 在这里 */)
+  webpack: {
+    plugins: [
+      // 在 CRA 的插件之前加载，默认的行为
+      new Plugin(),
 
-    // ...
-  ),
-}
-```
-
-这里给出一个示例：
-
-```js
-const { override, addWebpackPlugin } = require('customize-cra')
-const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
-
-module.exports = {
-  webpack: override(
-    // 把 antd 中的 moment.js 替换成 day.js
-    addWebpackPlugin(new AntdDayjsWebpackPlugin()),
-
-    // 拷贝文件
-    addWebpackPlugin(
-      new CopyPlugin({
-        patterns: [{ from: 'other', to: 'public' }],
-      })
-    )
-  ),
+      // 在 CRA 的插件之后加载
+      [new HtmlPlugin(), 'append'],
+    ],
+  },
 }
 ```

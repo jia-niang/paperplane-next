@@ -1,6 +1,12 @@
 对于 `create-react-app` 创建的项目，它默认不会读取 `.babelrc` 配置文件，而是使用自己内部的一套配置。
 
-如果想在 cra 项目中使用自己的 `.babelrc`，建议用 `react-app-rewired` 并配合 `customize-cra` 的 `useBabelRc()` 方法，这样才能读取配置文件。
+如果想定制这种项目的 Babel 配置，需要使用 `@craco/craco` 或 `react-app-rewired`。
+
+# 使用 `@craco/craco` 定制 Babel
+
+请参考 [“CreateReactApp / Babel”](/snippet/cra/babel) 章节。
+
+# 使用 `react-app-rewired` 定制 Babel
 
 依赖项：
 
@@ -20,7 +26,9 @@ npm add -D react-app-rewired customize-cra
 }
 ```
 
-创建 `config-overrides.js` 配置文件：
+创建 `config-overrides.js` 配置文件，然后根据你的需求从以下方式中二选一：
+
+复用已有的 `.babelrc` 配置：
 
 ```js
 const { override, useBabelRc } = require('customize-cra')
@@ -30,4 +38,18 @@ module.exports = {
 }
 ```
 
-这样即可使用 `.babelrc` 配置文件。
+或者，使用 `customize-cra` 的 API 来定制 Babel：
+
+```js
+const { override, fixBabelImports, addBabelPlugin } = require('customize-cra')
+
+module.exports = {
+  webpack: override(
+    // 快速配置 babel-plugin-import
+    fixBabelImports('import', { libraryName: 'antd', style: true }),
+
+    // 添加 Babel 插件
+    addBabelPlugin('@emotion')
+  ),
+}
+```
