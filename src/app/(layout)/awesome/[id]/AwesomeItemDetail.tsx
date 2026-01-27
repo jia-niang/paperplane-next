@@ -1,7 +1,7 @@
 import { Rating, Stack, StackProps, Text } from '@mantine/core'
 import Link from 'next/link'
 
-import { AwesomeItemResult } from '@/app/api/_awesome/items'
+import { AwesomeItemResult } from '@/app/api/trpc/_awesome/items'
 import { KVTable, KVTableRow } from '@/components/tables/KVTable'
 
 import { awesomeStarLevel } from '../_list/ListItem'

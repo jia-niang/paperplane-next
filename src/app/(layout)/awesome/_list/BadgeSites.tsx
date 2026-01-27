@@ -4,7 +4,7 @@ import NextImage from 'next/image'
 import { ReactNode, useMemo } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { AwesomeItemResult } from '@/app/api/_awesome/items'
+import { AwesomeItemResult } from '@/app/api/trpc/_awesome/items'
 
 export interface BadgeProps {
   awesome: AwesomeItemResult

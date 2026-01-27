@@ -7,7 +7,7 @@ import { ScrollArea, Stack } from '@mantine/core'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useId, useState } from 'react'
 
-import { AwesomeCatelogNode } from '@/app/api/_awesome/catelogs'
+import { AwesomeCatelogNode } from '@/app/api/trpc/_awesome/catelogs'
 import { useTRPC } from '@/lib/trpc-client'
 
 import CatelogItem, { DraggableCatelogItem } from './CatelogItem'

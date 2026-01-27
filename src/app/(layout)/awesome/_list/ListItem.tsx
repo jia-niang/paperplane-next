@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { CSSProperties } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { AwesomeItemResult } from '@/app/api/_awesome/items'
+import { AwesomeItemResult } from '@/app/api/trpc/_awesome/items'
 import ConfirmButton from '@/components/buttons/ConfirmButton'
 import { DraggableWrapperProps } from '@/components/layouts/Draggable'
 import { useTRPC } from '@/lib/trpc-client'

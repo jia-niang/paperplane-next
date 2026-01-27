@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CSSProperties, useId, useMemo, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-import { AwesomeItemResult, AwesomeTreeResult } from '@/app/api/_awesome/items'
+import { AwesomeItemResult, AwesomeTreeResult } from '@/app/api/trpc/_awesome/items'
 import { useTRPC } from '@/lib/trpc-client'
 
 import { useAwesome } from '../AwesomeState'
